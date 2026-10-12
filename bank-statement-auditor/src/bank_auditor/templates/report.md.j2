@@ -1,0 +1,76 @@
+# Аудит выписки: {{ r.source_file }}
+
+- Формат: `{{ r.format_name }}`
+- Период: {{ r.period_start.strftime("%d.%m.%Y") }} — {{ r.period_end.strftime("%d.%m.%Y") }}, операций: {{ r.n_transactions }}
+- Потрачено: **{{ r.total_spent | money(r.currency) }}**, поступления: {{ r.total_income | money(r.currency) }}
+- Подписки и регулярные платежи: **{{ r.monthly_burn | money(r.currency) }} в месяц** ({{ r.annual_burn | money(r.currency) }} в год)
+- Похоже на забытые: **{{ forgotten | length }}** — можно сэкономить **{{ r.forgotten_annual_savings | money(r.currency) }} в год**
+{% if r.uncategorized %}
+- Без категории: {{ r.uncategorized }} операций (включите `--llm`, чтобы доразметить)
+{% endif %}
+{% if r.other_currency_transactions %}
+- Операций в других валютах (не учтены в суммах): {{ r.other_currency_transactions }}
+{% endif %}
+
+## Траты по категориям
+
+| Категория | Сумма | Доля |
+|---|---:|---:|
+{% for c in categories %}
+| {{ c.label }} | {{ c.amount | money }} | {{ "%.1f" | format(c.share) }}% |
+{% endfor %}
+
+## Траты по месяцам
+
+| Месяц | Сумма |
+|---|---:|
+{% for m, v in r.monthly_spending.items() %}
+| {{ m }} | {{ v | money }} |
+{% endfor %}
+
+## Топ мерчантов
+
+| Мерчант | Категория | Сумма | Операций |
+|---|---|---:|---:|
+{% for m in r.top_merchants %}
+| {{ m.merchant }} | {{ m.category | cat }} | {{ m.total | money }} | {{ m.count }} |
+{% endfor %}
+
+## Подписки и регулярные списания
+
+| Мерчант | Сумма | Период | Раз | В год | Уверенность | Статус | Отменить? |
+|---|---:|---|---:|---:|---:|---|---|
+{% for s in active_subs %}
+| {{ s.merchant }} | {{ s.amount | money }} | {{ s.period_label | period }} (~{{ s.period_days }} дн.) | {{ s.occurrences }} | {{ s.annual_cost | money }} | {{ "%.2f" | format(s.confidence) }} | {{ s | status }} | {{ s.hint }} |
+{% endfor %}
+{% if inactive_subs %}
+
+Неактивные (списания прекратились):
+{% for s in inactive_subs %}
+- {{ s.merchant }} — {{ s.amount | money(s.currency) }}, последнее списание {{ s.last_date.strftime("%d.%m.%Y") }}
+{% endfor %}
+{% endif %}
+{% set flagged = active_subs | selectattr("reasons") | list %}
+{% if flagged %}
+
+### Почему стоит проверить
+
+{% for s in flagged %}
+- **{{ s.merchant }}**: {{ s.reasons | join("; ") }}
+{% endfor %}
+{% endif %}
+
+## Аномалии
+
+{% if r.anomalies %}
+| Дата | Тип | Мерчант | Сумма | Детали |
+|---|---|---|---:|---|
+{% for a in r.anomalies %}
+| {{ a.date.strftime("%d.%m.%Y") }} | {{ "дубль" if a.kind == "duplicate" else "всплеск" }} | {{ a.merchant }} | {{ a.amount | money(a.currency) }} | {{ a.details }} |
+{% endfor %}
+{% else %}
+Аномалий не найдено.
+{% endif %}
+
+---
+_Отчёт сгенерирован локально bank-statement-auditor; данные никуда не отправлялись._

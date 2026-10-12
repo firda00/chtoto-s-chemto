@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Аудит выписки — {{ r.source_file }}</title>
+<style>
+  :root { --bg:#f7f7f5; --card:#fff; --fg:#1d1d1f; --muted:#6b6b70; --line:#e4e4e0;
+          --accent:#2f6f4f; --warn:#b4541a; --bad:#b3261e; --bar:#cfe3d6; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#141416; --card:#1d1d20; --fg:#ececee; --muted:#9a9aa1; --line:#2c2c31;
+            --accent:#7cc39b; --warn:#f0a066; --bad:#ff8a80; --bar:#2b4a39; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 1040px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: 26px; margin: 0 0 4px; }
+  h2 { font-size: 18px; margin: 36px 0 12px; }
+  .muted { color: var(--muted); }
+  .kpis { display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:12px; margin-top:20px; }
+  .kpi { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; }
+  .kpi b { display:block; font-size:22px; font-variant-numeric: tabular-nums; }
+  .kpi.bad b { color: var(--bad); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; overflow-x:auto; }
+  table { width:100%; border-collapse: collapse; }
+  th, td { padding: 8px 12px; text-align:left; border-bottom:1px solid var(--line); vertical-align: top; }
+  th { font-size:12px; text-transform: uppercase; letter-spacing:.04em; color:var(--muted); font-weight:600; }
+  tr:last-child td { border-bottom: none; }
+  td.num, th.num { text-align:right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .bar { height:8px; border-radius:4px; background:var(--accent); opacity:.75; }
+  .tag { display:inline-block; padding:1px 8px; border-radius:999px; font-size:12px; border:1px solid var(--line); white-space:nowrap; }
+  .tag.bad { color:var(--bad); border-color:var(--bad); }
+  .tag.warn { color:var(--warn); border-color:var(--warn); }
+  .tag.ok { color:var(--accent); border-color:var(--accent); }
+  tr.forgotten td { background: color-mix(in srgb, var(--bad) 7%, transparent); }
+  tr.inactive td { color: var(--muted); }
+  ul.reasons { margin: 4px 0 0; padding-left: 18px; color: var(--muted); font-size: 13px; }
+  footer { margin-top: 40px; font-size: 13px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Аудит выписки</h1>
+  <div class="muted">{{ r.source_file }} · {{ r.format_name }} · {{ r.period_start.strftime("%d.%m.%Y") }} — {{ r.period_end.strftime("%d.%m.%Y") }} · операций: {{ r.n_transactions }}</div>
+
+  <div class="kpis">
+    <div class="kpi"><span class="muted">Потрачено</span><b>{{ r.total_spent | money(r.currency) }}</b></div>
+    <div class="kpi"><span class="muted">Поступления</span><b>{{ r.total_income | money(r.currency) }}</b></div>
+    <div class="kpi"><span class="muted">Подписки в месяц</span><b>{{ r.monthly_burn | money(r.currency) }}</b><span class="muted">{{ r.annual_burn | money(r.currency) }} в год</span></div>
+    <div class="kpi bad"><span class="muted">Забытые подписки</span><b>{{ r.forgotten_annual_savings | money(r.currency) }}</b><span class="muted">в год, {{ forgotten | length }} шт.</span></div>
+  </div>
+
+  <h2>Подписки и регулярные списания</h2>
+  <div class="card"><table>
+    <tr><th>Мерчант</th><th class="num">Сумма</th><th>Период</th><th class="num">Раз</th><th class="num">В год</th><th class="num">Уверенность</th><th>Статус</th><th>Отменить?</th></tr>
+    {% for s in r.subscriptions %}
+    <tr class="{{ 'forgotten' if s.forgotten else ('inactive' if not s.active else '') }}">
+      <td><b>{{ s.merchant }}</b><div class="muted">{{ s.category | cat }}</div>
+        {% if s.reasons %}<ul class="reasons">{% for reason in s.reasons %}<li>{{ reason }}</li>{% endfor %}</ul>{% endif %}</td>
+      <td class="num">{{ s.amount | money }}</td>
+      <td>{{ s.period_label | period }}<div class="muted">~{{ s.period_days }} дн., след. {{ s.next_expected.strftime("%d.%m") }}</div></td>
+      <td class="num">{{ s.occurrences }}</td>
+      <td class="num">{{ s.annual_cost | money }}</td>
+      <td class="num">{{ "%.2f" | format(s.confidence) }}</td>
+      {% set st = s | status %}
+      <td><span class="tag {{ 'bad' if s.forgotten else ('warn' if st == 'проверить' else ('ok' if st == 'ок' else '')) }}">{{ st }}</span></td>
+      <td>{{ s.hint }}</td>
+    </tr>
+    {% endfor %}
+  </table></div>
+
+  <h2>Траты по категориям</h2>
+  <div class="card"><table>
+    <tr><th>Категория</th><th class="num">Сумма</th><th class="num">Доля</th><th style="width:40%"></th></tr>
+    {% for c in categories %}
+    <tr><td>{{ c.label }}</td><td class="num">{{ c.amount | money }}</td><td class="num">{{ "%.1f" | format(c.share) }}%</td>
+      <td><div class="bar" style="width: {{ "%.1f" | format(c.bar) }}%"></div></td></tr>
+    {% endfor %}
+  </table></div>
+
+  <h2>Топ мерчантов</h2>
+  <div class="card"><table>
+    <tr><th>Мерчант</th><th>Категория</th><th class="num">Сумма</th><th class="num">Операций</th></tr>
+    {% for m in r.top_merchants %}
+    <tr><td>{{ m.merchant }}</td><td>{{ m.category | cat }}</td><td class="num">{{ m.total | money }}</td><td class="num">{{ m.count }}</td></tr>
+    {% endfor %}
+  </table></div>
+
+  <h2>Аномалии</h2>
+  {% if r.anomalies %}
+  <div class="card"><table>
+    <tr><th>Дата</th><th>Тип</th><th>Мерчант</th><th class="num">Сумма</th><th>Детали</th></tr>
+    {% for a in r.anomalies %}
+    <tr><td>{{ a.date.strftime("%d.%m.%Y") }}</td>
+      <td><span class="tag {{ 'bad' if a.kind == 'duplicate' else 'warn' }}">{{ "дубль" if a.kind == "duplicate" else "всплеск" }}</span></td>
+      <td>{{ a.merchant }}</td><td class="num">{{ a.amount | money(a.currency) }}</td><td>{{ a.details }}</td></tr>
+    {% endfor %}
+  </table></div>
+  {% else %}
+  <p class="muted">Аномалий не найдено.</p>
+  {% endif %}
+
+  <h2>По месяцам</h2>
+  <div class="card"><table>
+    <tr><th>Месяц</th><th class="num">Траты</th></tr>
+    {% for m, v in r.monthly_spending.items() %}
+    <tr><td>{{ m }}</td><td class="num">{{ v | money }}</td></tr>
+    {% endfor %}
+  </table></div>
+
+  <footer class="muted">Отчёт сгенерирован локально bank-statement-auditor — выписка никуда не отправлялась.</footer>
+</main>
+</body>
+</html>
