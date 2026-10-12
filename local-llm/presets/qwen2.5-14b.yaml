@@ -1,0 +1,29 @@
+id: qwen2.5-14b
+display_name: Qwen2.5 14B Instruct
+family: qwen2.5
+params_b: 14.77
+max_ctx: 32768
+quality: 0.80
+arch: {n_layers: 48, n_kv_heads: 8, head_dim: 128}
+ollama:
+  tag_prefix: "qwen2.5:14b-instruct"
+  quants: [q4_K_M, q5_K_M, q8_0, fp16]
+vllm:
+  hf_repo: Qwen/Qwen2.5-14B-Instruct
+  quant_repos:
+    awq: Qwen/Qwen2.5-14B-Instruct-AWQ
+    gptq: Qwen/Qwen2.5-14B-Instruct-GPTQ-Int4
+generation: {temperature: 0.7, top_p: 0.8, top_k: 20, repeat_penalty: 1.05}
+notes: "Лучшее качество в каталоге; на 8 GB не помещается без CPU-offload."
+# Рекомендации по VRAM-бюджету (GB) — проверяются тестом на соответствие формуле оценки
+recommended:
+  ollama:
+    8: null
+    12: {quant: q4_K_M, ctx: 4096}
+    16: {quant: q5_K_M, ctx: 16384}
+    24: {quant: q8_0, ctx: 16384}
+  vllm:
+    8: null
+    12: {quant: awq, ctx: 8192}
+    16: {quant: awq, ctx: 16384}
+    24: {quant: fp8, ctx: 16384}

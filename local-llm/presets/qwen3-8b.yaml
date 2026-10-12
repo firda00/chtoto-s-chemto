@@ -1,0 +1,29 @@
+id: qwen3-8b
+display_name: Qwen3 8B
+family: qwen3
+params_b: 8.19
+max_ctx: 32768
+quality: 0.78
+arch: {n_layers: 36, n_kv_heads: 8, head_dim: 128}
+ollama:
+  tag_prefix: "qwen3:8b"
+  quants: [q4_K_M, q8_0, fp16]
+vllm:
+  hf_repo: Qwen/Qwen3-8B
+  quant_repos:
+    awq: Qwen/Qwen3-8B-AWQ
+    fp8: Qwen/Qwen3-8B-FP8
+generation: {temperature: 0.6, top_p: 0.95, top_k: 20, repeat_penalty: 1.0}
+notes: "Гибридный thinking-режим (/think, /no_think). Для низкой латентности отключайте рассуждения."
+# Рекомендации по VRAM-бюджету (GB) — проверяются тестом на соответствие формуле оценки
+recommended:
+  ollama:
+    8: {quant: q4_K_M, ctx: 8192}
+    12: {quant: q8_0, ctx: 8192}
+    16: {quant: q8_0, ctx: 32768}
+    24: {quant: q8_0, ctx: 32768}
+  vllm:
+    8: {quant: awq, ctx: 8192}
+    12: {quant: awq, ctx: 32768}
+    16: {quant: fp8, ctx: 32768}
+    24: {quant: fp8, ctx: 32768}

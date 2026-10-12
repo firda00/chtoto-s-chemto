@@ -1,0 +1,68 @@
+# Локальный инференс: Ollama (по умолчанию) и vLLM (профиль "vllm", нужен NVIDIA GPU).
+#
+#   docker compose up -d ollama
+#   docker compose exec ollama ollama pull qwen2.5:7b-instruct-q4_K_M
+#   docker compose --profile vllm up -d vllm
+#
+# GPU-секции закомментированы, чтобы файл запускался и на машине без GPU (Ollama уйдёт на CPU).
+# Для GPU нужен NVIDIA Container Toolkit; раскомментируйте блоки `deploy`.
+# Команду vLLM под другой пресет сгенерирует: uv run llm vllm-cmd --preset <id> --quant awq --compose
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-models:/root/.ollama
+    environment:
+      - OLLAMA_KEEP_ALIVE=30m          # держать модель в VRAM между запросами
+      - OLLAMA_NUM_PARALLEL=1          # честная латентность при бенчмарке
+      - OLLAMA_FLASH_ATTENTION=1       # меньше памяти на внимание
+      - OLLAMA_KV_CACHE_TYPE=q8_0      # KV-кэш в 8 бит: ~x2 к длине контекста (нужен flash attention)
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+    restart: unless-stopped
+
+  vllm:
+    image: vllm/vllm-openai:latest
+    container_name: vllm
+    profiles: ["vllm"]
+    ports:
+      - "8000:8000"
+    ipc: host                          # vLLM использует shared memory для межпроцессного обмена
+    volumes:
+      - hf-cache:/root/.cache/huggingface
+    environment:
+      - HUGGING_FACE_HUB_TOKEN=${HUGGING_FACE_HUB_TOKEN:-}   # нужен для gated Llama
+    command:
+      - Qwen/Qwen2.5-7B-Instruct-AWQ
+      - --served-model-name
+      - qwen2.5-7b
+      - --quantization
+      - awq
+      - --max-model-len
+      - "8192"
+      - --gpu-memory-utilization
+      - "0.90"
+      - --tensor-parallel-size
+      - "1"
+      - --enable-prefix-caching
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+    restart: unless-stopped
+
+volumes:
+  ollama-models:
+  hf-cache:
