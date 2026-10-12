@@ -1,0 +1,21 @@
+[Event "Demo miniature (Scholar's mate)"]
+[Site "Tashkent"]
+[Date "2026.10.01"]
+[Round "1"]
+[White "Novice A"]
+[Black "Novice B"]
+[Result "1-0"]
+[ECO "C23"]
+
+1. e4 e5 2. Bc4 Nc6 3. Qh5 Nf6 4. Qxf7# 1-0
+
+[Event "Paris (Legal's mate)"]
+[Site "Cafe de la Regence"]
+[Date "1750.??.??"]
+[Round "?"]
+[White "Legal de Kermeur"]
+[Black "Saint Brie"]
+[Result "1-0"]
+[ECO "C41"]
+
+1. e4 e5 2. Nf3 d6 3. Bc4 Bg4 4. Nc3 g6 5. Nxe5 Bxd1 6. Bxf7+ Ke7 7. Nd5# 1-0

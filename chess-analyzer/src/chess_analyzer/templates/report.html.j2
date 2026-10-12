@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ t.title }}</title>
+<style>
+  :root { --bg:#faf8f3; --fg:#22211e; --muted:#6b675e; --card:#fff; --line:#e3ded2;
+          --blunder:#c0392b; --mistake:#e67e22; --inaccuracy:#d4ac0d; --good:#2e9e4f; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 980px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 1.8rem; margin: 0 0 16px; }
+  h2 { font-size: 1.35rem; margin: 40px 0 8px; border-bottom: 2px solid var(--line); padding-bottom: 6px; }
+  h3 { font-size: 1.1rem; margin: 24px 0 8px; }
+  .meta { color: var(--muted); margin: 0 0 12px; }
+  .table-wrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; background: var(--card); font-variant-numeric: tabular-nums; }
+  th, td { border: 1px solid var(--line); padding: 6px 10px; text-align: center; white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; }
+  th { background: #f1ede3; font-weight: 600; }
+  .graph { display:block; border:1px solid var(--line); border-radius:6px; margin: 8px 0; }
+  .move { display:grid; grid-template-columns: 360px 1fr; gap: 20px; background: var(--card);
+          border:1px solid var(--line); border-left: 6px solid var(--mistake); border-radius: 8px;
+          padding: 16px; margin: 16px 0; }
+  .move.blunder { border-left-color: var(--blunder); }
+  .move.inaccuracy { border-left-color: var(--inaccuracy); }
+  .move svg { width: 100%; height: auto; max-width: 360px; }
+  .move h4 { margin: 0 0 8px; font-size: 1.1rem; }
+  .badge { display:inline-block; padding: 1px 8px; border-radius: 10px; color:#fff; font-size: .85rem;
+           background: var(--mistake); vertical-align: middle; }
+  .blunder .badge { background: var(--blunder); }
+  .inaccuracy .badge { background: var(--inaccuracy); }
+  dl { display:grid; grid-template-columns: max-content 1fr; gap: 4px 12px; margin: 0 0 12px; }
+  dt { color: var(--muted); }
+  dd { margin: 0; overflow-wrap: anywhere; }
+  code { font-size: .85rem; background:#f1ede3; padding: 1px 4px; border-radius: 4px; }
+  blockquote { margin: 0; padding: 10px 14px; background: #f7f3e8; border-radius: 6px; }
+  a { color: #1f6feb; }
+  @media (max-width: 720px) { .move { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+<h1>{{ t.title }}</h1>
+{% for g in games %}
+{% set ga = g.ga %}
+<section class="game" id="game-{{ g.n }}">
+  <h2>{{ t.game }} {{ g.n }}: {{ ga.title }}</h2>
+  <p class="meta">{{ t.result }}: <strong>{{ ga.result }}</strong> · {{ t.engine }}: <code>{{ ga.engine }}</code>{% if ga.depth %} ({{ t.depth }} {{ ga.depth }}){% endif %} · {{ t.moves }}: {{ ga.moves | length }}</p>
+
+  <h3>{{ t.summary }}</h3>
+  <div class="table-wrap">
+  <table class="summary">
+    <thead><tr><th>{{ t.player }}</th><th>{{ t.color }}</th><th>{{ t.accuracy }}</th><th>{{ t.acpl }}</th>
+      {% for c in classes %}<th>{{ class_names[c] }}</th>{% endfor %}</tr></thead>
+    <tbody>
+    {% for p in g.players %}
+      <tr><td>{{ p.name }}</td><td>{{ t[p.color] }}</td>
+        <td>{{ p.accuracy if p.accuracy is not none else "—" }}%</td>
+        <td>{{ p.acpl if p.acpl is not none else "—" }}</td>
+        {% for c in classes %}<td>{{ p.counts.get(c.value, 0) }}</td>{% endfor %}</tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+  <h3>{{ t.graph }}</h3>
+  {{ g.graph }}
+
+  <h3>{{ t.critical }}</h3>
+  {% if not g.critical %}<p>{{ t.no_critical }}</p>{% endif %}
+  {% for c in g.critical %}
+  {% set m = c.m %}
+  <article class="move {{ m.classification.value }}" id="{{ c.id }}">
+    <div class="board">{{ c.svg }}</div>
+    <div>
+      <h4>{{ m.label }}{{ c.nag }} <span class="badge">{{ c.cls }}</span></h4>
+      <dl>
+        <dt>FEN</dt><dd><code>{{ m.fen_before }}</code></dd>
+        <dt>{{ t.played }}</dt><dd><strong>{{ m.san }}</strong></dd>
+        <dt>{{ t.best }}</dt><dd><strong>{{ m.best_move_san or "—" }}</strong></dd>
+        <dt>{{ t.line }}</dt><dd>{{ m.best_line_san | join(" ") or "—" }}</dd>
+        <dt>{{ t.eval }}</dt><dd>{{ m.eval_before | fmt_eval(m.mate_before) }} → {{ m.eval_after | fmt_eval(m.mate_after) }} ({{ t.loss }}: {{ m.cp_loss }} cp)</dd>
+        {% if c.motifs %}<dt>{{ t.motifs }}</dt><dd>{{ c.motifs | join("; ") }}</dd>{% endif %}
+      </dl>
+      {% if m.explanation %}<blockquote class="explanation">{{ m.explanation }}</blockquote>{% endif %}
+      <p><a href="{{ c.url }}" target="_blank" rel="noopener">{{ t.lichess }} ↗</a></p>
+    </div>
+  </article>
+  {% endfor %}
+</section>
+{% endfor %}
+</main>
+</body>
+</html>

@@ -1,0 +1,10 @@
+[Event "Online rapid (synthetic)"]
+[Site "lichess.org"]
+[Date "2026.09.20"]
+[Round "-"]
+[White "Hasty Hero"]
+[Black "Patient Pawn"]
+[Result "0-1"]
+[ECO "C23"]
+
+1. e4 e5 2. Bc4 Nc6 3. Qh5 Nf6 4. Qf3 Nd4 5. Qd3 d5 6. Bxd5 Nxd5 7. exd5 Qxd5 8. Nc3 Qxg2 9. Qe4 Bf5 10. Qxe5+ Be7 11. Qxc7 Nxc2+ 12. Kd1 Qxf2 13. Qxb7 Qe1# 0-1

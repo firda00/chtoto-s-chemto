@@ -1,0 +1,857 @@
+[
+  {
+    "title": "Hasty Hero — Patient Pawn (Online rapid (synthetic), 2026.09.20)",
+    "headers": {
+      "Event": "Online rapid (synthetic)",
+      "Site": "lichess.org",
+      "Date": "2026.09.20",
+      "Round": "-",
+      "White": "Hasty Hero",
+      "Black": "Patient Pawn",
+      "Result": "0-1",
+      "ECO": "C23"
+    },
+    "engine": "fake",
+    "depth": 14,
+    "result": "0-1",
+    "white": {
+      "name": "Hasty Hero",
+      "color": "white",
+      "accuracy": 82.0,
+      "acpl": 146.1,
+      "moves": 13,
+      "counts": {
+        "best": 9,
+        "excellent": 0,
+        "good": 0,
+        "inaccuracy": 0,
+        "mistake": 1,
+        "blunder": 3
+      }
+    },
+    "black": {
+      "name": "Patient Pawn",
+      "color": "black",
+      "accuracy": 61.5,
+      "acpl": 159.1,
+      "moves": 13,
+      "counts": {
+        "best": 10,
+        "excellent": 0,
+        "good": 0,
+        "inaccuracy": 0,
+        "mistake": 1,
+        "blunder": 2
+      }
+    },
+    "moves": [
+      {
+        "ply": 1,
+        "move_number": 1,
+        "color": "white",
+        "san": "e4",
+        "uci": "e2e4",
+        "fen_before": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "fen_after": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
+        "eval_before": 0,
+        "eval_after": 8,
+        "mate_before": null,
+        "mate_after": null,
+        "cp_loss": 0,
+        "win_before": 50.0,
+        "win_after": 50.74,
+        "accuracy": 100.0,
+        "classification": "best",
+        "best_move_san": "Nc3",
+        "best_move_uci": "b1c3",
+        "best_line_san": [
+          "Nc3",
+          "Nc6"
+        ],
+        "motifs": [],
+        "explanation": null
+      },
+      {
+        "ply": 2,
+        "move_number": 1,
+        "color": "black",
+        "san": "e5",
+        "uci": "e7e5",
+        "fen_before": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
+        "fen_after": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+        "eval_before": -8,
+        "eval_after": 0,
+        "mate_before": null,
+        "mate_after": null,
+        "cp_loss": 0,
+        "win_before": 49.26,
+        "win_after": 50.0,
+        "accuracy": 100.0,
+        "classification": "best",
+        "best_move_san": "Nc6",
+        "best_move_uci": "b8c6",
+        "best_line_san": [
+          "Nc6",
+          "Nc3"
+        ],
+        "motifs": [],
+        "explanation": null
+      },
+      {
+        "ply": 3,
+        "move_number": 2,
+        "color": "white",
+        "san": "Bc4",
+        "uci": "f1c4",
+        "fen_before": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+        "fen_after": "rnbqkbnr/pppp1ppp/8/4p3/2B1P3/8/PPPP1PPP/RNBQK1NR b KQkq - 1 2",
+        "eval_before": 0,
+        "eval_after": 98,
+        "mate_before": null,
+        "mate_after": null,
+        "cp_loss": 0,
+        "win_before": 50.0,
+        "win_after": 58.92,
+        "accuracy": 100.0,
+        "classification": "best",
+        "best_move_san": "Nc3",
+        "best_move_uci": "b1c3",
+        "best_line_san": [
+          "Nc3",
+          "Nc6"
+        ],
+        "motifs": [],
+        "explanation": null
+      },
+      {
+        "ply": 4,
+        "move_number": 2,
+        "color": "black",
+        "san": "Nc6",
+        "uci": "b8c6",
+        "fen_before": "rnbqkbnr/pppp1ppp/8/4p3/2B1P3/8/PPPP1PPP/RNBQK1NR b KQkq - 1 2",
+        "fen_after": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/8/PPPP1PPP/RNBQK1NR w KQkq - 2 3",
+        "eval_before": -98,
+        "eval_after": 0,
+        "mate_before": null,
+        "mate_after": null,
+        "cp_loss": 0,
+        "win_before": 41.08,
+        "win_after": 50.0,
+        "accuracy": 100.0,
+        "classification": "best",
+        "best_move_san": "Nc6",
+        "best_move_uci": "b8c6",
+        "best_line_san": [
+          "Nc6",
+          "Bxf7+"
+        ],
+        "motifs": [],
+        "explanation": null
+      },
+      {
+        "ply": 5,
+        "move_number": 3,
+        "color": "white",
+        "san": "Qh5",
+        "uci": "d1h5",
+        "fen_before": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/8/PPPP1PPP/RNBQK1NR w KQkq - 2 3",
+        "fen_after": "r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 3 3",
+        "eval_before": 0,
+        "eval_after": 108,
+        "mate_before": null,
+        "mate_after": null,
+        "cp_loss": 0,
+        "win_before": 50.0,
+        "win_after": 59.81,
+        "accuracy": 100.0,
+        "classification": "best",
+        "best_move_san": "Nc3",
+        "best_move_uci": "b1c3",
+        "best_line_san": [
+          "Nc3",
+          "Bc5"
+        ],
+        "motifs": [],
+        "explanation": null
+      },
+      {
+        "ply": 6,
+        "move_number": 3,
+        "color": "black",
+        "san": "Nf6",
+        "uci": "g8f6",
+        "fen_before": "r1bqkbnr/pppp1ppp/2n5/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 3 3",
+        "fen_after": "r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4",
+        "eval_before": -108,
+        "eval_after": -1000,
+        "mate_before": null,
+        "mate_after": -1,
+        "cp_loss": 892,
+        "win_before": 40.19,
+        "win_after": 2.46,
+        "accuracy": 17.79,
+        "classification": "blunder",
+        "best_move_san": "d5",
+        "best_move_uci": "d7d5",
+        "best_line_san": [
+          "d5",
+          "exd5"
+        ],
+        "motifs": [
+          {
+            "kind": "allowed_mate",
+            "squares": [],
+            "piece": null,
+            "mate_in": 1,
+            "move_san": "Qxf7#"
+          }
+        ],
+        "explanation": "3... Nf6 — грубая ошибка (зевок): оценка изменилась с -1.08 до #-1 (потеря 892 сп). Сопернику разрешён мат в 1 (Qxf7#). Сильнее было d5 (линия: d5 exd5)."
+      },
+      {
+        "ply": 7,
+        "move_number": 4,
+        "color": "white",
+        "san": "Qf3",
+        "uci": "h5f3",
+        "fen_before": "r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4",
+        "fen_after": "r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/5Q2/PPPP1PPP/RNB1K1NR b KQkq - 5 4",
+        "eval_before": 1000,
+        "eval_after": 314,
+        "mate_before": 1,
+        "mate_after": null,
+        "cp_loss": 686,
+        "win_before": 97.54,
+        "win_after": 76.06,
+        "accuracy": 38.32,
+        "classification": "mistake",
+        "best_move_san": "Qxf7#",
+        "best_move_uci": "h5f7",
+        "best_line_san": [
+          "Qxf7#"
+        ],
+        "motifs": [
+          {
+            "kind": "missed_mate",
+            "squares": [],
+            "piece": null,
+            "mate_in": 1,
+            "move_san": "Qxf7#"
+          }
+        ],
+        "explanation": "4. Qf3 — ошибка: оценка изменилась с #1 до +3.14 (потеря 686 сп). Упущен мат в 1 (Qxf7#). Сильнее было Qxf7# (линия: Qxf7#)."
+      },
+      {
+        "ply": 8,
+        "move_number": 4,
+        "color": "black",
+        "san": "Nd4",
+        "uci": "c6d4",
+        "fen_before": "r1bqkb1r/pppp1ppp/2n2n2/4p3/2B1P3/5Q2/PPPP1PPP/RNB1K1NR b KQkq - 5 4",
+        "fen_after": "r1bqkb1r/pppp1ppp/5n2/4p3/2BnP3/5Q2/PPPP1PPP/RNB1K1NR w KQkq - 6 5",
+        "eval_before": -314,
+        "eval_after": 133,
+        "mate_before": null,
+        "mate_after": null,
+        "cp_loss": 0,
+        "win_before": 23.94,
+        "win_after": 62.0,
+        "accuracy": 100.0,
+        "classification": "best",
+        "best_move_san": "Bc5",
+        "best_move_uci": "f8c5",
+        "best_line_san": [
+          "Bc5",
+          "Qxf6"
+        ],
+        "motifs": [],
+        "explanation": null
+      },
+      {
+        "ply": 9,
+        "move_number": 5,
+        "color": "white",
+        "san": "Qd3",
+        "uci": "f3d3",
+        "fen_before": "r1bqkb1r/pppp1ppp/5n2/4p3/2BnP3/5Q2/PPPP1PPP/RNB1K1NR w KQkq - 6 5",
+        "fen_after": "r1bqkb1r/pppp1ppp/5n2/4p3/2BnP3/3Q4/PPPP1PPP/RNB1K1NR b KQkq - 7 5",
+        "eval_before": -133,
+        "eval_after": 95,
+        "mate_before": null,
+        "mate_after": null,
+        "cp_loss": 0,
+        "win_before": 38.0,
+        "win_after": 58.66,
+        "accuracy": 100.0,
+        "classification": "best",
+        "best_move_san": "Qc3",
+        "best_move_uci": "f3c3",
+        "best_line_san": [
+          "Qc3",
+          "Nxe4"
+        ],
+        "motifs": [],
+        "explanation": null
+      },
+      {
+        "ply": 10,
+        "move_number": 5,
+        "color": "black",
+        "san": "d5",
+        "uci": "d7d5",
+        "fen_before": "r1bqkb1r/pppp1ppp/5n2/4p3/2BnP3/3Q4/PPPP1PPP/RNB1K1NR b KQkq - 7 5",
+        "fen_after": "r1bqkb1r/ppp2ppp/5n2/3pp3/2BnP3/3Q4/PPPP1PPP/RNB1K1NR w KQkq - 0 6",
+        "eval_before": -95,
+        "eval_after": 29,
+        "mate_before": null,
+        "mate_after": null,
+        "cp_loss": 0,
+        "win_before": 41.34,
+        "win_after": 52.67,
+        "accuracy": 100.0,
+        "classification": "best",
+        "best_move_san": "Nc6",
+        "best_move_uci": "d4c6",
+        "best_line_san": [
+          "Nc6",
+          "Qxd7+"
+        ],
+        "motifs": [],
+        "explanation": null
+      },
+      {
+        "ply": 11,
+        "move_number": 6,
+        "color": "white",
+        "san": "Bxd5",
+        "uci": "c4d5",
+        "fen_before": "r1bqkb1r/ppp2ppp/5n2/3pp3/2BnP3/3Q4/PPPP1PPP/RNB1K1NR w KQkq - 0 6",
+        "fen_after": "r1bqkb1r/ppp2ppp/5n2/3Bp3/3nP3/3Q4/PPPP1PPP/RNB1K1NR b KQkq - 0 6",
+        "eval_before": -29,
+        "eval_after": 80,
+        "mate_before": null,
+        "mate_after": null,
+        "cp_loss": 0,
+        "win_before": 47.33,
+        "win_after": 57.31,
+        "accuracy": 100.0,
+        "classification": "best",
+        "best_move_san": "exd5",
+        "best_move_uci": "e4d5",
+        "best_line_san": [
+          "exd5",
+          "Nxd5"
+        ],
+        "motifs": [],
+        "explanation": null
+      },
+      {
+        "ply": 12,
+        "move_number": 6,
+        "color": "black",
+        "san": "Nxd5",
+        "uci": "f6d5",
+        "fen_before": "r1bqkb1r/ppp2ppp/5n2/3Bp3/3nP3/3Q4/PPPP1PPP/RNB1K1NR b KQkq - 0 6",
+        "fen_after": "r1bqkb1r/ppp2ppp/8/3np3/3nP3/3Q4/PPPP1PPP/RNB1K1NR w KQkq - 0 7",
+        "eval_before": -80,
+        "eval_after": 36,
+        "mate_before": null,
+        "mate_after": null,
+        "cp_loss": 0,
+        "win_before": 42.69,
+        "win_after": 53.31,
+        "accuracy": 100.0,
+        "classification": "best",
+        "best_move_san": "Nxd5",
+        "best_move_uci": "f6d5",
+        "best_line_san": [
+          "Nxd5",
+          "exd5"
+        ],
+        "motifs": [],
+        "explanation": null
+      },
+      {
+        "ply": 13,
+        "move_number": 7,
+        "color": "white",
+        "san": "exd5",
+        "uci": "e4d5",
+        "fen_before": "r1bqkb1r/ppp2ppp/8/3np3/3nP3/3Q4/PPPP1PPP/RNB1K1NR w KQkq - 0 7",
+        "fen_after": "r1bqkb1r/ppp2ppp/8/3Pp3/3n4/3Q4/PPPP1PPP/RNB1K1NR b KQkq - 0 7",
+        "eval_before": -36,
+        "eval_after": 302,
+        "mate_before": null,
+        "mate_after": null,
+        "cp_loss": 0,
+        "win_before": 46.69,
+        "win_after": 75.25,
+        "accuracy": 100.0,
+        "classification": "best",
+        "best_move_san": "exd5",
+        "best_move_uci": "e4d5",
+        "best_line_san": [
+          "exd5",
+          "Qxd5"
+        ],
+        "motifs": [],
+        "explanation": null
+      },
+      {
+        "ply": 14,
+        "move_number": 7,
+        "color": "black",
+        "san": "Qxd5",
+        "uci": "d8d5",
+        "fen_before": "r1bqkb1r/ppp2ppp/8/3Pp3/3n4/3Q4/PPPP1PPP/RNB1K1NR b KQkq - 0 7",
+        "fen_after": "r1b1kb1r/ppp2ppp/8/3qp3/3n4/3Q4/PPPP1PPP/RNB1K1NR w KQkq - 0 8",
+        "eval_before": -302,
+        "eval_after": 131,
+        "mate_before": null,
+        "mate_after": null,
+        "cp_loss": 0,
+        "win_before": 24.75,
+        "win_after": 61.83,
+        "accuracy": 100.0,
+        "classification": "best",
+        "best_move_san": "Qxd5",
+        "best_move_uci": "d8d5",
+        "best_line_san": [
+          "Qxd5",
+          "Qxd4"
+        ],
+        "motifs": [],
+        "explanation": null
+      },
+      {
+        "ply": 15,
+        "move_number": 8,
+        "color": "white",
+        "san": "Nc3",
+        "uci": "b1c3",
+        "fen_before": "r1b1kb1r/ppp2ppp/8/3qp3/3n4/3Q4/PPPP1PPP/RNB1K1NR w KQkq - 0 8",
+        "fen_after": "r1b1kb1r/ppp2ppp/8/3qp3/3n4/2NQ4/PPPP1PPP/R1B1K1NR b KQkq - 1 8",
+        "eval_before": -131,
+        "eval_after": 207,
+        "mate_before": null,
+        "mate_after": null,
+        "cp_loss": 0,
+        "win_before": 38.17,
+        "win_after": 68.18,
+        "accuracy": 100.0,
+        "classification": "best",
+        "best_move_san": "Nc3",
+        "best_move_uci": "b1c3",
+        "best_line_san": [
+          "Nc3",
+          "Qxa2"
+        ],
+        "motifs": [],
+        "explanation": null
+      },
+      {
+        "ply": 16,
+        "move_number": 8,
+        "color": "black",
+        "san": "Qxg2",
+        "uci": "d5g2",
+        "fen_before": "r1b1kb1r/ppp2ppp/8/3qp3/3n4/2NQ4/PPPP1PPP/R1B1K1NR b KQkq - 1 8",
+        "fen_after": "r1b1kb1r/ppp2ppp/8/4p3/3n4/2NQ4/PPPP1PqP/R1B1K1NR w KQkq - 0 9",
+        "eval_before": -207,
+        "eval_after": 622,
+        "mate_before": null,
+        "mate_after": null,
+        "cp_loss": 0,
+        "win_before": 31.82,
+        "win_after": 90.81,
+        "accuracy": 100.0,
+        "classification": "best",
+        "best_move_san": "Nxc2+",
+        "best_move_uci": "d4c2",
+        "best_line_san": [
+          "Nxc2+",
+          "Qxc2"
+        ],
+        "motifs": [],
+        "explanation": null
+      },
+      {
+        "ply": 17,
+        "move_number": 9,
+        "color": "white",
+        "san": "Qe4",
+        "uci": "d3e4",
+        "fen_before": "r1b1kb1r/ppp2ppp/8/4p3/3n4/2NQ4/PPPP1PqP/R1B1K1NR w KQkq - 0 9",
+        "fen_after": "r1b1kb1r/ppp2ppp/8/4p3/3nQ3/2N5/PPPP1PqP/R1B1K1NR b KQkq - 1 9",
+        "eval_before": -622,
+        "eval_after": -125,
+        "mate_before": null,
+        "mate_after": null,
+        "cp_loss": 0,
+        "win_before": 9.19,
+        "win_after": 38.69,
+        "accuracy": 100.0,
+        "classification": "best",
+        "best_move_san": "Nge2",
+        "best_move_uci": "g1e2",
+        "best_line_san": [
+          "Nge2",
+          "Qxh1+"
+        ],
+        "motifs": [],
+        "explanation": null
+      },
+      {
+        "ply": 18,
+        "move_number": 9,
+        "color": "black",
+        "san": "Bf5",
+        "uci": "c8f5",
+        "fen_before": "r1b1kb1r/ppp2ppp/8/4p3/3nQ3/2N5/PPPP1PqP/R1B1K1NR b KQkq - 1 9",
+        "fen_after": "r3kb1r/ppp2ppp/8/4pb2/3nQ3/2N5/PPPP1PqP/R1B1K1NR w KQkq - 2 10",
+        "eval_before": 125,
+        "eval_after": -662,
+        "mate_before": null,
+        "mate_after": null,
+        "cp_loss": 787,
+        "win_before": 61.31,
+        "win_after": 8.04,
+        "accuracy": 7.97,
+        "classification": "blunder",
+        "best_move_san": "Qxe4+",
+        "best_move_uci": "g2e4",
+        "best_line_san": [
+          "Qxe4+",
+          "Nxe4"
+        ],
+        "motifs": [
+          {
+            "kind": "hanging_piece",
+            "squares": [
+              "g2"
+            ],
+            "piece": "queen",
+            "mate_in": null,
+            "move_san": null
+          },
+          {
+            "kind": "missed_capture",
+            "squares": [
+              "e4"
+            ],
+            "piece": "queen",
+            "mate_in": null,
+            "move_san": "Qxe4+"
+          }
+        ],
+        "explanation": "9... Bf5 — грубая ошибка (зевок): оценка изменилась с +1.25 до -6.62 (потеря 787 сп). Ферзь на g2 остаётся под боем без достаточной защиты; упущено взятие: ферзь на e4 (Qxe4+). Сильнее было Qxe4+ (линия: Qxe4+ Nxe4)."
+      },
+      {
+        "ply": 19,
+        "move_number": 10,
+        "color": "white",
+        "san": "Qxe5+",
+        "uci": "e4e5",
+        "fen_before": "r3kb1r/ppp2ppp/8/4pb2/3nQ3/2N5/PPPP1PqP/R1B1K1NR w KQkq - 2 10",
+        "fen_after": "r3kb1r/ppp2ppp/8/4Qb2/3n4/2N5/PPPP1PqP/R1B1K1NR b KQkq - 0 10",
+        "eval_before": 662,
+        "eval_after": 311,
+        "mate_before": null,
+        "mate_after": null,
+        "cp_loss": 351,
+        "win_before": 91.96,
+        "win_after": 75.86,
+        "accuracy": 49.0,
+        "classification": "blunder",
+        "best_move_san": "Qxg2",
+        "best_move_uci": "e4g2",
+        "best_line_san": [
+          "Qxg2",
+          "Bxc2"
+        ],
+        "motifs": [
+          {
+            "kind": "hanging_piece",
+            "squares": [
+              "h1"
+            ],
+            "piece": "rook",
+            "mate_in": null,
+            "move_san": null
+          },
+          {
+            "kind": "missed_capture",
+            "squares": [
+              "g2"
+            ],
+            "piece": "queen",
+            "mate_in": null,
+            "move_san": "Qxg2"
+          }
+        ],
+        "explanation": "10. Qxe5+ — грубая ошибка (зевок): оценка изменилась с +6.62 до +3.11 (потеря 351 сп). Ладья на h1 остаётся под боем без достаточной защиты; упущено взятие: ферзь на g2 (Qxg2). Сильнее было Qxg2 (линия: Qxg2 Bxc2)."
+      },
+      {
+        "ply": 20,
+        "move_number": 10,
+        "color": "black",
+        "san": "Be7",
+        "uci": "f8e7",
+        "fen_before": "r3kb1r/ppp2ppp/8/4Qb2/3n4/2N5/PPPP1PqP/R1B1K1NR b KQkq - 0 10",
+        "fen_after": "r3k2r/ppp1bppp/8/4Qb2/3n4/2N5/PPPP1PqP/R1B1K1NR w KQkq - 1 11",
+        "eval_before": -311,
+        "eval_after": 196,
+        "mate_before": null,
+        "mate_after": null,
+        "cp_loss": 0,
+        "win_before": 24.14,
+        "win_after": 67.3,
+        "accuracy": 100.0,
+        "classification": "best",
+        "best_move_san": "Be7",
+        "best_move_uci": "f8e7",
+        "best_line_san": [
+          "Be7",
+          "Qxf5"
+        ],
+        "motifs": [],
+        "explanation": null
+      },
+      {
+        "ply": 21,
+        "move_number": 11,
+        "color": "white",
+        "san": "Qxc7",
+        "uci": "e5c7",
+        "fen_before": "r3k2r/ppp1bppp/8/4Qb2/3n4/2N5/PPPP1PqP/R1B1K1NR w KQkq - 1 11",
+        "fen_after": "r3k2r/ppQ1bppp/8/5b2/3n4/2N5/PPPP1PqP/R1B1K1NR b KQkq - 0 11",
+        "eval_before": -196,
+        "eval_after": -88,
+        "mate_before": null,
+        "mate_after": null,
+        "cp_loss": 0,
+        "win_before": 32.7,
+        "win_after": 41.97,
+        "accuracy": 100.0,
+        "classification": "best",
+        "best_move_san": "Qxd4",
+        "best_move_uci": "e5d4",
+        "best_line_san": [
+          "Qxd4",
+          "Qxh1"
+        ],
+        "motifs": [],
+        "explanation": null
+      },
+      {
+        "ply": 22,
+        "move_number": 11,
+        "color": "black",
+        "san": "Nxc2+",
+        "uci": "d4c2",
+        "fen_before": "r3k2r/ppQ1bppp/8/5b2/3n4/2N5/PPPP1PqP/R1B1K1NR b KQkq - 0 11",
+        "fen_after": "r3k2r/ppQ1bppp/8/5b2/8/2N5/PPnP1PqP/R1B1K1NR w KQkq - 0 12",
+        "eval_before": 88,
+        "eval_after": 527,
+        "mate_before": null,
+        "mate_after": null,
+        "cp_loss": 0,
+        "win_before": 58.03,
+        "win_after": 87.44,
+        "accuracy": 100.0,
+        "classification": "best",
+        "best_move_san": "Qxh1",
+        "best_move_uci": "g2h1",
+        "best_line_san": [
+          "Qxh1",
+          "Qxe7+"
+        ],
+        "motifs": [],
+        "explanation": null
+      },
+      {
+        "ply": 23,
+        "move_number": 12,
+        "color": "white",
+        "san": "Kd1",
+        "uci": "e1d1",
+        "fen_before": "r3k2r/ppQ1bppp/8/5b2/8/2N5/PPnP1PqP/R1B1K1NR w KQkq - 0 12",
+        "fen_after": "r3k2r/ppQ1bppp/8/5b2/8/2N5/PPnP1PqP/R1BK2NR b kq - 1 12",
+        "eval_before": -527,
+        "eval_after": -1000,
+        "mate_before": null,
+        "mate_after": -1,
+        "cp_loss": 473,
+        "win_before": 12.56,
+        "win_after": 2.46,
+        "accuracy": 64.28,
+        "classification": "blunder",
+        "best_move_san": "Ke2",
+        "best_move_uci": "e1e2",
+        "best_line_san": [
+          "Ke2",
+          "Qxh1"
+        ],
+        "motifs": [
+          {
+            "kind": "allowed_mate",
+            "squares": [],
+            "piece": null,
+            "mate_in": 1,
+            "move_san": "Qf1#"
+          },
+          {
+            "kind": "hanging_piece",
+            "squares": [
+              "a1"
+            ],
+            "piece": "rook",
+            "mate_in": null,
+            "move_san": null
+          },
+          {
+            "kind": "hanging_piece",
+            "squares": [
+              "h1"
+            ],
+            "piece": "rook",
+            "mate_in": null,
+            "move_san": null
+          }
+        ],
+        "explanation": "12. Kd1 — грубая ошибка (зевок): оценка изменилась с -5.27 до #-1 (потеря 473 сп). Сопернику разрешён мат в 1 (Qf1#); ладья на a1 остаётся под боем без достаточной защиты; ладья на h1 остаётся под боем без достаточной защиты. Сильнее было Ke2 (линия: Ke2 Qxh1)."
+      },
+      {
+        "ply": 24,
+        "move_number": 12,
+        "color": "black",
+        "san": "Qxf2",
+        "uci": "g2f2",
+        "fen_before": "r3k2r/ppQ1bppp/8/5b2/8/2N5/PPnP1PqP/R1BK2NR b kq - 1 12",
+        "fen_after": "r3k2r/ppQ1bppp/8/5b2/8/2N5/PPnP1q1P/R1BK2NR w kq - 0 13",
+        "eval_before": 1000,
+        "eval_after": 611,
+        "mate_before": 1,
+        "mate_after": null,
+        "cp_loss": 389,
+        "win_before": 97.54,
+        "win_after": 90.46,
+        "accuracy": 73.62,
+        "classification": "mistake",
+        "best_move_san": "Qf1#",
+        "best_move_uci": "g2f1",
+        "best_line_san": [
+          "Qf1#"
+        ],
+        "motifs": [
+          {
+            "kind": "missed_mate",
+            "squares": [],
+            "piece": null,
+            "mate_in": 1,
+            "move_san": "Qf1#"
+          }
+        ],
+        "explanation": "12... Qxf2 — ошибка: оценка изменилась с #1 до +6.11 (потеря 389 сп). Упущен мат в 1 (Qf1#). Сильнее было Qf1# (линия: Qf1#)."
+      },
+      {
+        "ply": 25,
+        "move_number": 13,
+        "color": "white",
+        "san": "Qxb7",
+        "uci": "c7b7",
+        "fen_before": "r3k2r/ppQ1bppp/8/5b2/8/2N5/PPnP1q1P/R1BK2NR w kq - 0 13",
+        "fen_after": "r3k2r/pQ2bppp/8/5b2/8/2N5/PPnP1q1P/R1BK2NR b kq - 0 13",
+        "eval_before": -611,
+        "eval_after": -1000,
+        "mate_before": null,
+        "mate_after": -1,
+        "cp_loss": 389,
+        "win_before": 9.54,
+        "win_after": 2.46,
+        "accuracy": 73.62,
+        "classification": "blunder",
+        "best_move_san": "Nge2",
+        "best_move_uci": "g1e2",
+        "best_line_san": [
+          "Nge2",
+          "Nxa1"
+        ],
+        "motifs": [
+          {
+            "kind": "allowed_mate",
+            "squares": [],
+            "piece": null,
+            "mate_in": 1,
+            "move_san": "Qe1#"
+          },
+          {
+            "kind": "hanging_piece",
+            "squares": [
+              "a1"
+            ],
+            "piece": "rook",
+            "mate_in": null,
+            "move_san": null
+          }
+        ],
+        "explanation": "13. Qxb7 — грубая ошибка (зевок): оценка изменилась с -6.11 до #-1 (потеря 389 сп). Сопернику разрешён мат в 1 (Qe1#); ладья на a1 остаётся под боем без достаточной защиты. Сильнее было Nge2 (линия: Nge2 Nxa1)."
+      },
+      {
+        "ply": 26,
+        "move_number": 13,
+        "color": "black",
+        "san": "Qe1#",
+        "uci": "f2e1",
+        "fen_before": "r3k2r/pQ2bppp/8/5b2/8/2N5/PPnP1q1P/R1BK2NR b kq - 0 13",
+        "fen_after": "r3k2r/pQ2bppp/8/5b2/8/2N5/PPnP3P/R1BKq1NR w kq - 1 14",
+        "eval_before": 1000,
+        "eval_after": 1000,
+        "mate_before": 1,
+        "mate_after": 0,
+        "cp_loss": 0,
+        "win_before": 97.54,
+        "win_after": 97.54,
+        "accuracy": 100.0,
+        "classification": "best",
+        "best_move_san": "Qe1#",
+        "best_move_uci": "f2e1",
+        "best_line_san": [
+          "Qe1#"
+        ],
+        "motifs": [],
+        "explanation": null
+      }
+    ],
+    "white_evals": [
+      0,
+      8,
+      0,
+      98,
+      0,
+      108,
+      1000,
+      314,
+      -133,
+      95,
+      -29,
+      80,
+      -36,
+      302,
+      -131,
+      207,
+      -622,
+      -125,
+      662,
+      311,
+      -196,
+      -88,
+      -527,
+      -1000,
+      -611,
+      -1000,
+      -1000
+    ]
+  }
+]

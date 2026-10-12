@@ -1,0 +1,49 @@
+# {{ t.title }}
+
+{% for g in games %}
+{% set ga = g.ga %}
+## {{ t.game }} {{ g.n }}: {{ ga.title }}
+
+- {{ t.result }}: **{{ ga.result }}**
+- {{ t.engine }}: `{{ ga.engine }}`{% if ga.depth %} ({{ t.depth }} {{ ga.depth }}){% endif %}
+
+- {{ t.moves }}: {{ ga.moves | length }}
+
+### {{ t.summary }}
+
+| {{ t.player }} | {{ t.color }} | {{ t.accuracy }} | {{ t.acpl }} |{% for c in classes %} {{ class_names[c] }} |{% endfor %}
+
+|---|---|---|---|{% for c in classes %}---|{% endfor %}
+
+{% for p in g.players %}
+| {{ p.name }} | {{ t[p.color] }} | {{ p.accuracy if p.accuracy is not none else "—" }}% | {{ p.acpl if p.acpl is not none else "—" }} |{% for c in classes %} {{ p.counts.get(c.value, 0) }} |{% endfor %}
+
+{% endfor %}
+
+### {{ t.critical }}
+
+{% if not g.critical %}
+{{ t.no_critical }}
+
+{% endif %}
+{% for c in g.critical %}
+{% set m = c.m %}
+#### {{ m.label }}{{ c.nag }} — {{ c.cls }}
+
+![{{ m.label }}]({{ boards_dir }}/{{ c.id }}.svg)
+
+- FEN: `{{ m.fen_before }}`
+- {{ t.played }}: **{{ m.san }}**, {{ t.best }}: **{{ m.best_move_san or "—" }}**
+- {{ t.line }}: {{ m.best_line_san | join(" ") or "—" }}
+- {{ t.eval }}: {{ m.eval_before | fmt_eval(m.mate_before) }} → {{ m.eval_after | fmt_eval(m.mate_after) }} ({{ t.loss }}: {{ m.cp_loss }} cp)
+{% if c.motifs %}
+- {{ t.motifs }}: {{ c.motifs | join("; ") }}
+{% endif %}
+- [{{ t.lichess }}]({{ c.url }})
+
+{% if m.explanation %}
+> {{ m.explanation }}
+
+{% endif %}
+{% endfor %}
+{% endfor %}
