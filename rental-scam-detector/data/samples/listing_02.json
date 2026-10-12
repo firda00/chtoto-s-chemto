@@ -1,0 +1,17 @@
+{
+  "id": "listing_02",
+  "title": "СРОЧНО 2-комн. квартира, Мирабад",
+  "description": "СРОЧНО! Отличная квартира, всё есть. Я сейчас нахожусь за границей, ключи передам через курьера. Для брони нужна предоплата 50$ на карту 8600 1234 5678 9012. Звонки не принимаю, пишите только в Telegram @arenda_tash.",
+  "price": 250,
+  "currency": "USD",
+  "area_m2": 60,
+  "rooms": 2,
+  "district": "Мирабад",
+  "contact_phone": "+998 90 111 22 33",
+  "contact_name": "Хозяин",
+  "photos": [
+    "images/flat_a_1_repost.jpg"
+  ],
+  "posted_at": "2026-10-01T22:40:00",
+  "source_url": "https://example.local/rent/listing_02"
+}

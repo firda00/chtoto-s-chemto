@@ -1,0 +1,17 @@
+{
+  "id": "listing_04",
+  "title": "Shoshilinch! 3 xonali kvartira, Yakkasaroy",
+  "description": "Shoshilinch! Faqat bugun shu narxda. Zo'r kvartira, hammasi bor. Hozir chet eldaman, kalitni pochta orqali yuboraman. Oldindan to'lov kartaga o'tkazing. Faqat telegramga yozing.",
+  "price": 3800000,
+  "currency": "UZS",
+  "area_m2": 85,
+  "rooms": 3,
+  "district": "Yakkasaroy",
+  "contact_phone": "+998 (90) 111-22-33",
+  "contact_name": "Jasur",
+  "photos": [
+    "images/flat_c_1.png"
+  ],
+  "posted_at": "2026-10-02T23:10:00",
+  "source_url": "https://example.local/rent/listing_04"
+}

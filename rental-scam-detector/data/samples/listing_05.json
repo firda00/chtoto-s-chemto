@@ -1,0 +1,18 @@
+{
+  "id": "listing_05",
+  "title": "3-bedroom apartment, Mirzo Ulugbek",
+  "description": "Bright 3-bedroom apartment in Mirzo Ulugbek, 95 m², floor 6 of 9. Near Buyuk Ipak Yo'li metro station, landmark: Korzinka. Renovated in 2024, fully furnished, kitchen 14 m². Includes: air conditioning, dishwasher, washing machine, parking. Long-term only, contract available. Utilities paid separately. Viewing any day by appointment.",
+  "price": 780,
+  "currency": "USD",
+  "area_m2": 95,
+  "rooms": 3,
+  "district": "Mirzo Ulug'bek",
+  "contact_phone": "+998 99 812 35 07",
+  "contact_name": "Malika",
+  "photos": [
+    "images/flat_d_1.png",
+    "images/flat_d_2.png"
+  ],
+  "posted_at": "2026-09-25T14:30:00",
+  "source_url": "https://example.local/rent/listing_05"
+}

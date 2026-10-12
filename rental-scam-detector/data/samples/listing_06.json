@@ -1,0 +1,17 @@
+{
+  "id": "listing_06",
+  "title": "Квартира в Сергели",
+  "description": "Хорошая квартира, всё есть. Недорого. Пишите в WhatsApp.",
+  "price": 125,
+  "currency": "USD",
+  "area_m2": 38,
+  "rooms": 1,
+  "district": "Сергели",
+  "contact_phone": "+998 94 620 71 55",
+  "contact_name": "Ольга",
+  "photos": [
+    "images/flat_e_1.png"
+  ],
+  "posted_at": "2026-10-03T08:05:00",
+  "source_url": "https://example.local/rent/listing_06"
+}

@@ -4,12 +4,12 @@
 
 | Проект | Что делает | Статус |
 |---|---|---|
-| `rag-system/` | Naive RAG и Modular RAG (гибридный поиск, реранжирование, роутинг, tool calling) на pgvector | в работе |
-| `local-llm/` | Запуск и бенчмарк локальных LLM (Qwen/Llama) через Ollama и vLLM, квантование, параметры генерации | в работе |
-| `mlops-tracker/` | Трекинг экспериментов и Evaluation Harness для LLM-агентов | в работе |
-| `ats-resume-tailor/` | ATS Score резюме и адаптация под вакансию | в работе |
-| `rental-scam-detector/` | Scam Score объявлений аренды: дубликаты фото, текстовые признаки, CatBoost | в работе |
-| `bank-statement-auditor/` | Парсинг банковских выписок, категоризация трат, поиск забытых подписок | в работе |
-| `chess-analyzer/` | Анализ партий PGN через Stockfish и объяснение ошибок через LLM | в работе |
+| `rag-system/` | Naive RAG и Modular RAG (гибридный поиск, реранжирование, роутинг, tool calling) на pgvector | готово |
+| `local-llm/` | Запуск и бенчмарк локальных LLM (Qwen/Llama) через Ollama и vLLM, квантование, параметры генерации | готово |
+| `mlops-tracker/` | Трекинг экспериментов и Evaluation Harness для LLM-агентов | готово |
+| `ats-resume-tailor/` | ATS Score резюме и адаптация под вакансию | готово |
+| `rental-scam-detector/` | Scam Score объявлений аренды: дубликаты фото, текстовые признаки, CatBoost | готово |
+| `bank-statement-auditor/` | Парсинг банковских выписок, категоризация трат, поиск забытых подписок | готово |
+| `chess-analyzer/` | Анализ партий PGN через Stockfish и объяснение ошибок через LLM | готово |
 
 Общие правила — в [CONVENTIONS.md](CONVENTIONS.md).
