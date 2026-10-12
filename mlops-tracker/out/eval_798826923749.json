@@ -1,0 +1,538 @@
+{
+  "run_id": "798826923749",
+  "run_name": "baseline",
+  "task": "examples.tasks:answer_question",
+  "dataset": "qa",
+  "dataset_path": "data\\evals\\qa.jsonl",
+  "dataset_hash": "39cf53cf863b",
+  "scorers": [
+    "contains",
+    "llm_judge"
+  ],
+  "params": {
+    "task": "examples.tasks:answer_question",
+    "dataset": "qa",
+    "dataset_path": "data\\evals\\qa.jsonl",
+    "dataset_hash": "39cf53cf863b",
+    "n_cases": 12,
+    "scorers": [
+      "contains",
+      "llm_judge"
+    ],
+    "concurrency": 4,
+    "retries": 0,
+    "timeout": null,
+    "judge_model": "mock-llm"
+  },
+  "created_at": "2026-10-12T18:28:59+00:00",
+  "duration_s": 0.009,
+  "metrics": {
+    "n_cases": 12.0,
+    "n_passed": 10.0,
+    "pass_rate": 0.8333333333333334,
+    "error_rate": 0.0,
+    "latency_ms_mean": 0.102,
+    "latency_ms_p50": 0.057,
+    "latency_ms_p95": 0.26554999999999995,
+    "retries_total": 0.0,
+    "tokens_prompt": 0.0,
+    "tokens_completion": 0.0,
+    "contains/mean": 0.8333333333333334,
+    "contains/pass_rate": 0.8333333333333334,
+    "llm_judge/mean": 0.8125,
+    "llm_judge/pass_rate": 0.8333333333333334
+  },
+  "cases": [
+    {
+      "id": "qa-capital-fr",
+      "input": "What is the capital of France?",
+      "expected": "Paris",
+      "output": "The capital of France is Paris.",
+      "error": null,
+      "latency_ms": 0.221,
+      "attempts": 1,
+      "usage": {},
+      "cost_usd": null,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "found": [
+              "Paris"
+            ],
+            "missing": []
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "judge_score": 5,
+            "reason": "mock: совпало 100% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "lang": "en",
+        "topic": "geo"
+      },
+      "task_metadata": {}
+    },
+    {
+      "id": "qa-capital-uz",
+      "input": "Какая столица у Узбекистана?",
+      "expected": "Ташкент",
+      "output": "Столица Узбекистана — Ташкент.",
+      "error": null,
+      "latency_ms": 0.143,
+      "attempts": 1,
+      "usage": {},
+      "cost_usd": null,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "found": [
+              "Ташкент"
+            ],
+            "missing": []
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "judge_score": 5,
+            "reason": "mock: совпало 100% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "lang": "ru",
+        "topic": "geo"
+      },
+      "task_metadata": {}
+    },
+    {
+      "id": "qa-math-mul",
+      "input": "Сколько будет 17 * 3?",
+      "expected": "51",
+      "output": "Ответ: 51",
+      "error": null,
+      "latency_ms": 0.32,
+      "attempts": 1,
+      "usage": {},
+      "cost_usd": null,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "found": [
+              "51"
+            ],
+            "missing": []
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "judge_score": 5,
+            "reason": "mock: совпало 100% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "lang": "ru",
+        "topic": "math"
+      },
+      "task_metadata": {}
+    },
+    {
+      "id": "qa-math-precedence",
+      "input": "What is 2 + 2 * 2?",
+      "expected": "6",
+      "output": "Ответ: 8",
+      "error": null,
+      "latency_ms": 0.064,
+      "attempts": 1,
+      "usage": {},
+      "cost_usd": null,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 0.0,
+          "passed": false,
+          "details": {
+            "found": [],
+            "missing": [
+              "6"
+            ]
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 0.0,
+          "passed": false,
+          "details": {
+            "judge_score": 1,
+            "reason": "mock: совпало 0% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        }
+      },
+      "passed": false,
+      "metadata": {
+        "lang": "en",
+        "topic": "math",
+        "note": "проверка приоритета операций"
+      },
+      "task_metadata": {}
+    },
+    {
+      "id": "qa-tolstoy",
+      "input": "Кто написал «Войну и мир»?",
+      "expected": "Толстой",
+      "output": "«Войну и мир» написал Лев Толстой.",
+      "error": null,
+      "latency_ms": 0.041,
+      "attempts": 1,
+      "usage": {},
+      "cost_usd": null,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "found": [
+              "Толстой"
+            ],
+            "missing": []
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "judge_score": 5,
+            "reason": "mock: совпало 100% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "lang": "ru",
+        "topic": "literature"
+      },
+      "task_metadata": {}
+    },
+    {
+      "id": "qa-einstein",
+      "input": "Who developed the theory of relativity?",
+      "expected": "Einstein",
+      "output": "The theory of relativity was developed by Albert Einstein.",
+      "error": null,
+      "latency_ms": 0.033,
+      "attempts": 1,
+      "usage": {},
+      "cost_usd": null,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "found": [
+              "Einstein"
+            ],
+            "missing": []
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "judge_score": 5,
+            "reason": "mock: совпало 100% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "lang": "en",
+        "topic": "science"
+      },
+      "task_metadata": {}
+    },
+    {
+      "id": "qa-project-lang",
+      "input": "На каком языке написан этот проект?",
+      "expected": "Python",
+      "output": "Этот проект написан на Python 3.12.",
+      "error": null,
+      "latency_ms": 0.07,
+      "attempts": 1,
+      "usage": {},
+      "cost_usd": null,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "found": [
+              "Python"
+            ],
+            "missing": []
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "judge_score": 5,
+            "reason": "mock: совпало 100% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "lang": "ru",
+        "topic": "meta"
+      },
+      "task_metadata": {}
+    },
+    {
+      "id": "qa-rag",
+      "input": "What does RAG stand for?",
+      "expected": [
+        "Retrieval",
+        "Generation"
+      ],
+      "output": "RAG stands for Retrieval-Augmented Generation.",
+      "error": null,
+      "latency_ms": 0.04,
+      "attempts": 1,
+      "usage": {},
+      "cost_usd": null,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "found": [
+              "Retrieval",
+              "Generation"
+            ],
+            "missing": []
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "judge_score": 5,
+            "reason": "mock: совпало 100% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "lang": "en",
+        "topic": "ml"
+      },
+      "task_metadata": {}
+    },
+    {
+      "id": "qa-planets",
+      "input": "Сколько планет в Солнечной системе?",
+      "expected": "8",
+      "output": "В Солнечной системе 8 планет.",
+      "error": null,
+      "latency_ms": 0.034,
+      "attempts": 1,
+      "usage": {},
+      "cost_usd": null,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "found": [
+              "8"
+            ],
+            "missing": []
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "judge_score": 5,
+            "reason": "mock: совпало 100% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "lang": "ru",
+        "topic": "science"
+      },
+      "task_metadata": {}
+    },
+    {
+      "id": "qa-boiling",
+      "input": "At what temperature does water start boiling, in Celsius?",
+      "expected": "100",
+      "output": "Water boils at 100 °C at sea level.",
+      "error": null,
+      "latency_ms": 0.05,
+      "attempts": 1,
+      "usage": {},
+      "cost_usd": null,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "found": [
+              "100"
+            ],
+            "missing": []
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "judge_score": 5,
+            "reason": "mock: совпало 100% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "lang": "en",
+        "topic": "science"
+      },
+      "task_metadata": {}
+    },
+    {
+      "id": "qa-mlops",
+      "input": "Что такое MLOps?",
+      "expected": [
+        "эксплуатац",
+        "машинного обучения"
+      ],
+      "output": "MLOps — практики эксплуатации моделей машинного обучения в продакшене.",
+      "error": null,
+      "latency_ms": 0.031,
+      "attempts": 1,
+      "usage": {},
+      "cost_usd": null,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "found": [
+              "эксплуатац",
+              "машинного обучения"
+            ],
+            "missing": []
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 0.75,
+          "passed": true,
+          "details": {
+            "judge_score": 4,
+            "reason": "mock: совпало 67% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "lang": "ru",
+        "topic": "ml"
+      },
+      "task_metadata": {}
+    },
+    {
+      "id": "qa-nile",
+      "input": "Какая самая длинная река в мире?",
+      "expected": "Нил",
+      "output": "Не знаю.",
+      "error": null,
+      "latency_ms": 0.177,
+      "attempts": 1,
+      "usage": {},
+      "cost_usd": null,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 0.0,
+          "passed": false,
+          "details": {
+            "found": [],
+            "missing": [
+              "Нил"
+            ]
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 0.0,
+          "passed": false,
+          "details": {
+            "judge_score": 1,
+            "reason": "mock: совпало 0% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        }
+      },
+      "passed": false,
+      "metadata": {
+        "lang": "ru",
+        "topic": "geo",
+        "note": "нет в базе знаний — ожидаемый провал"
+      },
+      "task_metadata": {}
+    }
+  ],
+  "report_path": "out\\eval_798826923749.json"
+}

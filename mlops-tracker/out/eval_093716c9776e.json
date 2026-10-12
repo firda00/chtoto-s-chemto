@@ -1,0 +1,1015 @@
+{
+  "run_id": "093716c9776e",
+  "run_name": "mock-agent",
+  "task": "examples.tasks:mock_agent",
+  "dataset": "qa",
+  "dataset_path": "data\\evals\\qa.jsonl",
+  "dataset_hash": "39cf53cf863b",
+  "scorers": [
+    "contains",
+    "llm_judge",
+    "cost",
+    "latency"
+  ],
+  "params": {
+    "task": "examples.tasks:mock_agent",
+    "dataset": "qa",
+    "dataset_path": "data\\evals\\qa.jsonl",
+    "dataset_hash": "39cf53cf863b",
+    "n_cases": 12,
+    "scorers": [
+      "contains",
+      "llm_judge",
+      "cost",
+      "latency"
+    ],
+    "concurrency": 4,
+    "retries": 1,
+    "timeout": 30.0,
+    "judge_model": "mock-llm"
+  },
+  "created_at": "2026-10-12T18:29:07+00:00",
+  "duration_s": 0.012,
+  "metrics": {
+    "n_cases": 12.0,
+    "n_passed": 10.0,
+    "pass_rate": 0.8333333333333334,
+    "error_rate": 0.0,
+    "latency_ms_mean": 2.44675,
+    "latency_ms_p50": 2.3945,
+    "latency_ms_p95": 3.178,
+    "retries_total": 0.0,
+    "tokens_prompt": 1544.0,
+    "tokens_completion": 536.0,
+    "cost_usd_total": 0.0001844,
+    "contains/mean": 0.8333333333333334,
+    "contains/pass_rate": 0.8333333333333334,
+    "cost/mean": 1.0,
+    "cost/pass_rate": 1.0,
+    "latency/mean": 1.0,
+    "latency/pass_rate": 1.0,
+    "llm_judge/mean": 0.8333333333333334,
+    "llm_judge/pass_rate": 0.8333333333333334
+  },
+  "cases": [
+    {
+      "id": "qa-capital-fr",
+      "input": "What is the capital of France?",
+      "expected": "Paris",
+      "output": "The capital of France is Paris.",
+      "error": null,
+      "latency_ms": 1.43,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 131,
+        "completion_tokens": 46
+      },
+      "cost_usd": 0.00001575,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "found": [
+              "Paris"
+            ],
+            "missing": []
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "judge_score": 5,
+            "reason": "mock: совпало 100% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        },
+        "cost": {
+          "name": "cost",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "cost_usd": 0.00001575,
+            "max_usd": 0.01,
+            "tokens": {
+              "prompt_tokens": 131,
+              "completion_tokens": 46
+            }
+          }
+        },
+        "latency": {
+          "name": "latency",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "latency_ms": 1.43,
+            "max_ms": 2000.0
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "lang": "en",
+        "topic": "geo"
+      },
+      "task_metadata": {
+        "steps": 2,
+        "trace": [
+          {
+            "action": "kb",
+            "input": "What is the capital of France?",
+            "observation": "The capital of France is Paris."
+          },
+          {
+            "action": "final",
+            "input": "The capital of France is Paris."
+          }
+        ],
+        "model": "mock-llm"
+      }
+    },
+    {
+      "id": "qa-capital-uz",
+      "input": "Какая столица у Узбекистана?",
+      "expected": "Ташкент",
+      "output": "Столица Узбекистана — Ташкент.",
+      "error": null,
+      "latency_ms": 2.622,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 123,
+        "completion_tokens": 42
+      },
+      "cost_usd": 0.000014550000000000001,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "found": [
+              "Ташкент"
+            ],
+            "missing": []
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "judge_score": 5,
+            "reason": "mock: совпало 100% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        },
+        "cost": {
+          "name": "cost",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "cost_usd": 0.000014550000000000001,
+            "max_usd": 0.01,
+            "tokens": {
+              "prompt_tokens": 123,
+              "completion_tokens": 42
+            }
+          }
+        },
+        "latency": {
+          "name": "latency",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "latency_ms": 2.62,
+            "max_ms": 2000.0
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "lang": "ru",
+        "topic": "geo"
+      },
+      "task_metadata": {
+        "steps": 2,
+        "trace": [
+          {
+            "action": "kb",
+            "input": "Какая столица у Узбекистана?",
+            "observation": "Столица Узбекистана — Ташкент."
+          },
+          {
+            "action": "final",
+            "input": "Столица Узбекистана — Ташкент."
+          }
+        ],
+        "model": "mock-llm"
+      }
+    },
+    {
+      "id": "qa-math-mul",
+      "input": "Сколько будет 17 * 3?",
+      "expected": "51",
+      "output": "Ответ: 51",
+      "error": null,
+      "latency_ms": 1.883,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 119,
+        "completion_tokens": 38
+      },
+      "cost_usd": 0.00001355,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "found": [
+              "51"
+            ],
+            "missing": []
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "judge_score": 5,
+            "reason": "mock: совпало 100% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        },
+        "cost": {
+          "name": "cost",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "cost_usd": 0.00001355,
+            "max_usd": 0.01,
+            "tokens": {
+              "prompt_tokens": 119,
+              "completion_tokens": 38
+            }
+          }
+        },
+        "latency": {
+          "name": "latency",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "latency_ms": 1.88,
+            "max_ms": 2000.0
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "lang": "ru",
+        "topic": "math"
+      },
+      "task_metadata": {
+        "steps": 2,
+        "trace": [
+          {
+            "action": "calculator",
+            "input": "17 * 3",
+            "observation": "51"
+          },
+          {
+            "action": "final",
+            "input": "Ответ: 51"
+          }
+        ],
+        "model": "mock-llm"
+      }
+    },
+    {
+      "id": "qa-math-precedence",
+      "input": "What is 2 + 2 * 2?",
+      "expected": "6",
+      "output": "Answer: 6",
+      "error": null,
+      "latency_ms": 2.957,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 125,
+        "completion_tokens": 40
+      },
+      "cost_usd": 0.00001425,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "found": [
+              "6"
+            ],
+            "missing": []
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "judge_score": 5,
+            "reason": "mock: совпало 100% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        },
+        "cost": {
+          "name": "cost",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "cost_usd": 0.00001425,
+            "max_usd": 0.01,
+            "tokens": {
+              "prompt_tokens": 125,
+              "completion_tokens": 40
+            }
+          }
+        },
+        "latency": {
+          "name": "latency",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "latency_ms": 2.96,
+            "max_ms": 2000.0
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "lang": "en",
+        "topic": "math",
+        "note": "проверка приоритета операций"
+      },
+      "task_metadata": {
+        "steps": 2,
+        "trace": [
+          {
+            "action": "calculator",
+            "input": "2 + 2 * 2",
+            "observation": "6"
+          },
+          {
+            "action": "final",
+            "input": "Answer: 6"
+          }
+        ],
+        "model": "mock-llm"
+      }
+    },
+    {
+      "id": "qa-tolstoy",
+      "input": "Кто написал «Войну и мир»?",
+      "expected": "Толстой",
+      "output": "«Войну и мир» написал Лев Толстой.",
+      "error": null,
+      "latency_ms": 2.351,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 136,
+        "completion_tokens": 49
+      },
+      "cost_usd": 0.000016600000000000004,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "found": [
+              "Толстой"
+            ],
+            "missing": []
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "judge_score": 5,
+            "reason": "mock: совпало 100% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        },
+        "cost": {
+          "name": "cost",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "cost_usd": 0.000016600000000000004,
+            "max_usd": 0.01,
+            "tokens": {
+              "prompt_tokens": 136,
+              "completion_tokens": 49
+            }
+          }
+        },
+        "latency": {
+          "name": "latency",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "latency_ms": 2.35,
+            "max_ms": 2000.0
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "lang": "ru",
+        "topic": "literature"
+      },
+      "task_metadata": {
+        "steps": 2,
+        "trace": [
+          {
+            "action": "kb",
+            "input": "Кто написал «Войну и мир»?",
+            "observation": "«Войну и мир» написал Лев Толстой."
+          },
+          {
+            "action": "final",
+            "input": "«Войну и мир» написал Лев Толстой."
+          }
+        ],
+        "model": "mock-llm"
+      }
+    },
+    {
+      "id": "qa-einstein",
+      "input": "Who developed the theory of relativity?",
+      "expected": "Einstein",
+      "output": "The theory of relativity was developed by Albert Einstein.",
+      "error": null,
+      "latency_ms": 2.125,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 134,
+        "completion_tokens": 49
+      },
+      "cost_usd": 0.0000165,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "found": [
+              "Einstein"
+            ],
+            "missing": []
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "judge_score": 5,
+            "reason": "mock: совпало 100% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        },
+        "cost": {
+          "name": "cost",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "cost_usd": 0.0000165,
+            "max_usd": 0.01,
+            "tokens": {
+              "prompt_tokens": 134,
+              "completion_tokens": 49
+            }
+          }
+        },
+        "latency": {
+          "name": "latency",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "latency_ms": 2.12,
+            "max_ms": 2000.0
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "lang": "en",
+        "topic": "science"
+      },
+      "task_metadata": {
+        "steps": 2,
+        "trace": [
+          {
+            "action": "kb",
+            "input": "Who developed the theory of relativity?",
+            "observation": "The theory of relativity was developed by Albert Einstein."
+          },
+          {
+            "action": "final",
+            "input": "The theory of relativity was developed by Albert Einstein."
+          }
+        ],
+        "model": "mock-llm"
+      }
+    },
+    {
+      "id": "qa-project-lang",
+      "input": "На каком языке написан этот проект?",
+      "expected": "Python",
+      "output": "Этот проект написан на Python 3.12.",
+      "error": null,
+      "latency_ms": 2.212,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 133,
+        "completion_tokens": 48
+      },
+      "cost_usd": 0.000016250000000000002,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "found": [
+              "Python"
+            ],
+            "missing": []
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "judge_score": 5,
+            "reason": "mock: совпало 100% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        },
+        "cost": {
+          "name": "cost",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "cost_usd": 0.000016250000000000002,
+            "max_usd": 0.01,
+            "tokens": {
+              "prompt_tokens": 133,
+              "completion_tokens": 48
+            }
+          }
+        },
+        "latency": {
+          "name": "latency",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "latency_ms": 2.21,
+            "max_ms": 2000.0
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "lang": "ru",
+        "topic": "meta"
+      },
+      "task_metadata": {
+        "steps": 2,
+        "trace": [
+          {
+            "action": "kb",
+            "input": "На каком языке написан этот проект?",
+            "observation": "Этот проект написан на Python 3.12."
+          },
+          {
+            "action": "final",
+            "input": "Этот проект написан на Python 3.12."
+          }
+        ],
+        "model": "mock-llm"
+      }
+    },
+    {
+      "id": "qa-rag",
+      "input": "What does RAG stand for?",
+      "expected": [
+        "Retrieval",
+        "Generation"
+      ],
+      "output": "RAG stands for Retrieval-Augmented Generation.",
+      "error": null,
+      "latency_ms": 2.258,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 129,
+        "completion_tokens": 46
+      },
+      "cost_usd": 0.00001565,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "found": [
+              "Retrieval",
+              "Generation"
+            ],
+            "missing": []
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "judge_score": 5,
+            "reason": "mock: совпало 100% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        },
+        "cost": {
+          "name": "cost",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "cost_usd": 0.00001565,
+            "max_usd": 0.01,
+            "tokens": {
+              "prompt_tokens": 129,
+              "completion_tokens": 46
+            }
+          }
+        },
+        "latency": {
+          "name": "latency",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "latency_ms": 2.26,
+            "max_ms": 2000.0
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "lang": "en",
+        "topic": "ml"
+      },
+      "task_metadata": {
+        "steps": 2,
+        "trace": [
+          {
+            "action": "kb",
+            "input": "What does RAG stand for?",
+            "observation": "RAG stands for Retrieval-Augmented Generation."
+          },
+          {
+            "action": "final",
+            "input": "RAG stands for Retrieval-Augmented Generation."
+          }
+        ],
+        "model": "mock-llm"
+      }
+    },
+    {
+      "id": "qa-planets",
+      "input": "Сколько планет в Солнечной системе?",
+      "expected": "8",
+      "output": "В Солнечной системе 8 планет.",
+      "error": null,
+      "latency_ms": 2.438,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 127,
+        "completion_tokens": 44
+      },
+      "cost_usd": 0.00001515,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "found": [
+              "8"
+            ],
+            "missing": []
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "judge_score": 5,
+            "reason": "mock: совпало 100% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        },
+        "cost": {
+          "name": "cost",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "cost_usd": 0.00001515,
+            "max_usd": 0.01,
+            "tokens": {
+              "prompt_tokens": 127,
+              "completion_tokens": 44
+            }
+          }
+        },
+        "latency": {
+          "name": "latency",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "latency_ms": 2.44,
+            "max_ms": 2000.0
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "lang": "ru",
+        "topic": "science"
+      },
+      "task_metadata": {
+        "steps": 2,
+        "trace": [
+          {
+            "action": "kb",
+            "input": "Сколько планет в Солнечной системе?",
+            "observation": "В Солнечной системе 8 планет."
+          },
+          {
+            "action": "final",
+            "input": "В Солнечной системе 8 планет."
+          }
+        ],
+        "model": "mock-llm"
+      }
+    },
+    {
+      "id": "qa-boiling",
+      "input": "At what temperature does water start boiling, in Celsius?",
+      "expected": "100",
+      "output": "Water boils at 100 °C at sea level.",
+      "error": null,
+      "latency_ms": 2.719,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 146,
+        "completion_tokens": 53
+      },
+      "cost_usd": 0.0000179,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "found": [
+              "100"
+            ],
+            "missing": []
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "judge_score": 5,
+            "reason": "mock: совпало 100% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        },
+        "cost": {
+          "name": "cost",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "cost_usd": 0.0000179,
+            "max_usd": 0.01,
+            "tokens": {
+              "prompt_tokens": 146,
+              "completion_tokens": 53
+            }
+          }
+        },
+        "latency": {
+          "name": "latency",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "latency_ms": 2.72,
+            "max_ms": 2000.0
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "lang": "en",
+        "topic": "science"
+      },
+      "task_metadata": {
+        "steps": 2,
+        "trace": [
+          {
+            "action": "kb",
+            "input": "At what temperature does water start boiling, in Celsius?",
+            "observation": "Water boils at 100 °C at sea level."
+          },
+          {
+            "action": "final",
+            "input": "Water boils at 100 °C at sea level."
+          }
+        ],
+        "model": "mock-llm"
+      }
+    },
+    {
+      "id": "qa-mlops",
+      "input": "Что такое MLOps?",
+      "expected": [
+        "эксплуатац",
+        "машинного обучения"
+      ],
+      "output": "Не знаю.",
+      "error": null,
+      "latency_ms": 3.133,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 116,
+        "completion_tokens": 39
+      },
+      "cost_usd": 0.0000136,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 0.0,
+          "passed": false,
+          "details": {
+            "found": [],
+            "missing": [
+              "эксплуатац",
+              "машинного обучения"
+            ]
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 0.0,
+          "passed": false,
+          "details": {
+            "judge_score": 1,
+            "reason": "mock: совпало 0% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        },
+        "cost": {
+          "name": "cost",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "cost_usd": 0.0000136,
+            "max_usd": 0.01,
+            "tokens": {
+              "prompt_tokens": 116,
+              "completion_tokens": 39
+            }
+          }
+        },
+        "latency": {
+          "name": "latency",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "latency_ms": 3.13,
+            "max_ms": 2000.0
+          }
+        }
+      },
+      "passed": false,
+      "metadata": {
+        "lang": "ru",
+        "topic": "ml"
+      },
+      "task_metadata": {
+        "steps": 2,
+        "trace": [
+          {
+            "action": "kb",
+            "input": "Что такое MLOps?",
+            "observation": "NOT_FOUND"
+          },
+          {
+            "action": "final",
+            "input": "Не знаю."
+          }
+        ],
+        "model": "mock-llm"
+      }
+    },
+    {
+      "id": "qa-nile",
+      "input": "Какая самая длинная река в мире?",
+      "expected": "Нил",
+      "output": "Не знаю.",
+      "error": null,
+      "latency_ms": 3.233,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 125,
+        "completion_tokens": 42
+      },
+      "cost_usd": 0.00001465,
+      "scores": {
+        "contains": {
+          "name": "contains",
+          "value": 0.0,
+          "passed": false,
+          "details": {
+            "found": [],
+            "missing": [
+              "Нил"
+            ]
+          }
+        },
+        "llm_judge": {
+          "name": "llm_judge",
+          "value": 0.0,
+          "passed": false,
+          "details": {
+            "judge_score": 1,
+            "reason": "mock: совпало 0% слов эталона",
+            "judge_model": "mock-llm"
+          }
+        },
+        "cost": {
+          "name": "cost",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "cost_usd": 0.00001465,
+            "max_usd": 0.01,
+            "tokens": {
+              "prompt_tokens": 125,
+              "completion_tokens": 42
+            }
+          }
+        },
+        "latency": {
+          "name": "latency",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "latency_ms": 3.23,
+            "max_ms": 2000.0
+          }
+        }
+      },
+      "passed": false,
+      "metadata": {
+        "lang": "ru",
+        "topic": "geo",
+        "note": "нет в базе знаний — ожидаемый провал"
+      },
+      "task_metadata": {
+        "steps": 2,
+        "trace": [
+          {
+            "action": "kb",
+            "input": "Какая самая длинная река в мире?",
+            "observation": "NOT_FOUND"
+          },
+          {
+            "action": "final",
+            "input": "Не знаю."
+          }
+        ],
+        "model": "mock-llm"
+      }
+    }
+  ],
+  "report_path": "out\\eval_093716c9776e.json"
+}

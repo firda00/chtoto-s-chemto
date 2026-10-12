@@ -1,0 +1,517 @@
+{
+  "run_id": "927c89210c23",
+  "run_name": "extract-contact",
+  "task": "examples.tasks:extract_contact",
+  "dataset": "json_extraction",
+  "dataset_path": "data\\evals\\json_extraction.yaml",
+  "dataset_hash": "b1ea4dbd6191",
+  "scorers": [
+    "json_schema",
+    "json_match"
+  ],
+  "params": {
+    "task": "examples.tasks:extract_contact",
+    "dataset": "json_extraction",
+    "dataset_path": "data\\evals\\json_extraction.yaml",
+    "dataset_hash": "b1ea4dbd6191",
+    "n_cases": 6,
+    "scorers": [
+      "json_schema",
+      "json_match"
+    ],
+    "concurrency": 4,
+    "retries": 0,
+    "timeout": null
+  },
+  "created_at": "2026-10-12T18:29:09+00:00",
+  "duration_s": 0.004,
+  "metrics": {
+    "n_cases": 6.0,
+    "n_passed": 4.0,
+    "pass_rate": 0.6666666666666666,
+    "error_rate": 0.0,
+    "latency_ms_mean": 0.10633333333333334,
+    "latency_ms_p50": 0.055,
+    "latency_ms_p95": 0.27525,
+    "retries_total": 0.0,
+    "tokens_prompt": 0.0,
+    "tokens_completion": 0.0,
+    "json_match/mean": 0.9166666666666666,
+    "json_match/pass_rate": 0.6666666666666666,
+    "json_schema/mean": 0.8333333333333334,
+    "json_schema/pass_rate": 0.8333333333333334
+  },
+  "cases": [
+    {
+      "id": "ex-ru-full",
+      "input": "Здравствуйте! Меня зовут Алия Каримова, мне 29 лет. Почта aliya.karimova@example.uz, телефон +998 90 123-45-67.",
+      "expected": {
+        "name": "Алия Каримова",
+        "email": "aliya.karimova@example.uz",
+        "phone": "+998901234567",
+        "age": 29
+      },
+      "output": "{\"name\": \"Алия Каримова\", \"email\": \"aliya.karimova@example.uz\", \"phone\": \"+998901234567\", \"age\": 29}",
+      "error": null,
+      "latency_ms": 0.321,
+      "attempts": 1,
+      "usage": {},
+      "cost_usd": null,
+      "scores": {
+        "json_schema": {
+          "name": "json_schema",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "errors": []
+          }
+        },
+        "json_match": {
+          "name": "json_match",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "mismatched": {}
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "schema": {
+          "type": "object",
+          "required": [
+            "name",
+            "email",
+            "phone",
+            "age"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 2
+            },
+            "email": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^[^@\\s]+@[^@\\s]+\\.[a-z]{2,}$"
+            },
+            "phone": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^\\+?\\d{9,15}$"
+            },
+            "age": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 120
+            }
+          }
+        }
+      },
+      "task_metadata": {}
+    },
+    {
+      "id": "ex-en-full",
+      "input": "Hi, my name is John Smith, I'm 41 years old. Reach me at John.Smith@Mail.com or +1 (415) 555-0199.",
+      "expected": {
+        "name": "John Smith",
+        "email": "john.smith@mail.com",
+        "phone": "+14155550199",
+        "age": 41
+      },
+      "output": "{\"name\": \"John Smith\", \"email\": \"john.smith@mail.com\", \"phone\": \"+14155550199\", \"age\": 41}",
+      "error": null,
+      "latency_ms": 0.066,
+      "attempts": 1,
+      "usage": {},
+      "cost_usd": null,
+      "scores": {
+        "json_schema": {
+          "name": "json_schema",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "errors": []
+          }
+        },
+        "json_match": {
+          "name": "json_match",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "mismatched": {}
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "schema": {
+          "type": "object",
+          "required": [
+            "name",
+            "email",
+            "phone",
+            "age"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 2
+            },
+            "email": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^[^@\\s]+@[^@\\s]+\\.[a-z]{2,}$"
+            },
+            "phone": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^\\+?\\d{9,15}$"
+            },
+            "age": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 120
+            }
+          }
+        }
+      },
+      "task_metadata": {}
+    },
+    {
+      "id": "ex-ru-no-phone",
+      "input": "Пишите на hr@company.ru — меня зовут Дмитрий, 35 лет.",
+      "expected": {
+        "name": "Дмитрий",
+        "email": "hr@company.ru",
+        "phone": null,
+        "age": 35
+      },
+      "output": "{\"name\": \"Дмитрий\", \"email\": \"hr@company.ru\", \"phone\": null, \"age\": 35}",
+      "error": null,
+      "latency_ms": 0.036,
+      "attempts": 1,
+      "usage": {},
+      "cost_usd": null,
+      "scores": {
+        "json_schema": {
+          "name": "json_schema",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "errors": []
+          }
+        },
+        "json_match": {
+          "name": "json_match",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "mismatched": {}
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "schema": {
+          "type": "object",
+          "required": [
+            "name",
+            "email",
+            "phone",
+            "age"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 2
+            },
+            "email": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^[^@\\s]+@[^@\\s]+\\.[a-z]{2,}$"
+            },
+            "phone": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^\\+?\\d{9,15}$"
+            },
+            "age": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 120
+            }
+          }
+        }
+      },
+      "task_metadata": {}
+    },
+    {
+      "id": "ex-en-no-age",
+      "input": "Contact: Maria Garcia, maria.garcia@uni.edu, phone 8 800 555 35 35",
+      "expected": {
+        "name": "Maria Garcia",
+        "email": "maria.garcia@uni.edu",
+        "phone": "88005553535",
+        "age": null
+      },
+      "output": "{\"name\": \"Maria Garcia\", \"email\": \"maria.garcia@uni.edu\", \"phone\": \"88005553535\", \"age\": null}",
+      "error": null,
+      "latency_ms": 0.138,
+      "attempts": 1,
+      "usage": {},
+      "cost_usd": null,
+      "scores": {
+        "json_schema": {
+          "name": "json_schema",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "errors": []
+          }
+        },
+        "json_match": {
+          "name": "json_match",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "mismatched": {}
+          }
+        }
+      },
+      "passed": true,
+      "metadata": {
+        "schema": {
+          "type": "object",
+          "required": [
+            "name",
+            "email",
+            "phone",
+            "age"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 2
+            },
+            "email": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^[^@\\s]+@[^@\\s]+\\.[a-z]{2,}$"
+            },
+            "phone": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^\\+?\\d{9,15}$"
+            },
+            "age": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 120
+            }
+          }
+        }
+      },
+      "task_metadata": {}
+    },
+    {
+      "id": "ex-ru-informal",
+      "input": "Я Тимур, мне 22 года, email: timur_22@mail.ru",
+      "expected": {
+        "name": "Тимур",
+        "email": "timur_22@mail.ru",
+        "phone": null,
+        "age": 22
+      },
+      "output": "{\"name\": null, \"email\": \"timur_22@mail.ru\", \"phone\": null, \"age\": 22}",
+      "error": null,
+      "latency_ms": 0.044,
+      "attempts": 1,
+      "usage": {},
+      "cost_usd": null,
+      "scores": {
+        "json_schema": {
+          "name": "json_schema",
+          "value": 0.0,
+          "passed": false,
+          "details": {
+            "errors": [
+              "$.name: ожидался тип string, получено NoneType"
+            ]
+          }
+        },
+        "json_match": {
+          "name": "json_match",
+          "value": 0.75,
+          "passed": false,
+          "details": {
+            "mismatched": {
+              "name": {
+                "expected": "Тимур",
+                "got": null
+              }
+            }
+          }
+        }
+      },
+      "passed": false,
+      "metadata": {
+        "schema": {
+          "type": "object",
+          "required": [
+            "name",
+            "email",
+            "phone",
+            "age"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 2
+            },
+            "email": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^[^@\\s]+@[^@\\s]+\\.[a-z]{2,}$"
+            },
+            "phone": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^\\+?\\d{9,15}$"
+            },
+            "age": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 120
+            }
+          }
+        },
+        "note": "имя без маркера «меня зовут» — сложный кейс"
+      },
+      "task_metadata": {}
+    },
+    {
+      "id": "ex-en-obfuscated-email",
+      "input": "I'm Alex Brown, 30 y.o., email alex.brown(at)gmail.com, tel +44 20 7946 0958",
+      "expected": {
+        "name": "Alex Brown",
+        "email": "alex.brown@gmail.com",
+        "phone": "+442079460958",
+        "age": 30
+      },
+      "output": "{\"name\": \"Alex Brown\", \"email\": null, \"phone\": \"+442079460958\", \"age\": 30}",
+      "error": null,
+      "latency_ms": 0.033,
+      "attempts": 1,
+      "usage": {},
+      "cost_usd": null,
+      "scores": {
+        "json_schema": {
+          "name": "json_schema",
+          "value": 1.0,
+          "passed": true,
+          "details": {
+            "errors": []
+          }
+        },
+        "json_match": {
+          "name": "json_match",
+          "value": 0.75,
+          "passed": false,
+          "details": {
+            "mismatched": {
+              "email": {
+                "expected": "alex.brown@gmail.com",
+                "got": null
+              }
+            }
+          }
+        }
+      },
+      "passed": false,
+      "metadata": {
+        "schema": {
+          "type": "object",
+          "required": [
+            "name",
+            "email",
+            "phone",
+            "age"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 2
+            },
+            "email": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^[^@\\s]+@[^@\\s]+\\.[a-z]{2,}$"
+            },
+            "phone": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^\\+?\\d{9,15}$"
+            },
+            "age": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 120
+            }
+          }
+        },
+        "note": "email замаскирован (at) — сложный кейс"
+      },
+      "task_metadata": {}
+    }
+  ],
+  "report_path": "out\\eval_927c89210c23.json"
+}

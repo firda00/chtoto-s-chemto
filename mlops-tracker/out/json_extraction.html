@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eval-отчёт · extract-contact</title>
+<style>
+:root {
+  --bg: #f7f7f5; --panel: #ffffff; --text: #1d1d1b; --muted: #6b6b66; --line: #e4e4df;
+  --pass: #1f7a4d; --pass-bg: #e6f4ec; --fail: #b3261e; --fail-bg: #fbe9e7;
+  --warn: #8a5a00; --warn-bg: #fff4d6; --accent: #2f5bd3; --code: #f0f0ec;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141413; --panel: #1d1d1b; --text: #ecece8; --muted: #9b9b95; --line: #2e2e2b;
+    --pass: #5cc98d; --pass-bg: #16301f; --fail: #ff8a80; --fail-bg: #3a1714;
+    --warn: #ffcc66; --warn-bg: #3a2c0c; --accent: #8fb0ff; --code: #262624;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 14px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+main { max-width: 1200px; margin: 0 auto; padding: 32px 16px 64px; }
+h1 { font-size: 24px; margin: 0 0 4px; }
+h2 { font-size: 18px; margin: 36px 0 12px; }
+.meta { color: var(--muted); }
+.meta code, td code { background: var(--code); padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 20px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.card .k { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+.card .v { font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.tablewrap { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+.num { text-align: right; white-space: nowrap; }
+.badge { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.b-pass { color: var(--pass); background: var(--pass-bg); }
+.b-fail, .b-error, .b-regression { color: var(--fail); background: var(--fail-bg); }
+.b-fixed { color: var(--pass); background: var(--pass-bg); }
+.b-added, .b-removed, .b-still_failing, .b-still_passing { color: var(--muted); background: var(--code); }
+tr.regression td { background: var(--fail-bg); }
+tr.fixed td { background: var(--pass-bg); }
+.s-ok { color: var(--pass); } .s-bad { color: var(--fail); font-weight: 600; }
+.better { color: var(--pass); } .worse { color: var(--fail); font-weight: 600; }
+.warn { background: var(--warn-bg); color: var(--warn); padding: 10px 14px; border-radius: 8px; margin: 12px 0; }
+details summary { cursor: pointer; color: var(--accent); }
+pre { background: var(--code); padding: 8px 10px; border-radius: 6px; white-space: pre-wrap; word-break: break-word; margin: 6px 0; font-size: 12px; }
+.out { max-width: 380px; word-break: break-word; }
+footer { margin-top: 40px; color: var(--muted); font-size: 12px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Eval-отчёт: extract-contact</h1>
+  <div class="meta">
+    Ран <code>927c89210c23</code> · task <code>examples.tasks:extract_contact</code> ·
+    датасет <code>json_extraction</code> (hash <code>b1ea4dbd6191</code>) ·
+    2026-10-12T18:29:09+00:00 · 0.00 с
+  </div>
+
+  <section class="cards">
+    <div class="card"><div class="k">pass_rate</div><div class="v">66.7%</div></div>
+    <div class="card"><div class="k">n_passed</div><div class="v">4</div></div>
+    <div class="card"><div class="k">n_cases</div><div class="v">6</div></div>
+    <div class="card"><div class="k">error_rate</div><div class="v">0.0%</div></div>
+    <div class="card"><div class="k">latency_ms_p50</div><div class="v">0.06</div></div>
+    <div class="card"><div class="k">latency_ms_p95</div><div class="v">0.28</div></div>
+    <div class="card"><div class="k">tokens_prompt</div><div class="v">0</div></div>
+    <div class="card"><div class="k">tokens_completion</div><div class="v">0</div></div>
+  </section>
+
+  <h2>Скореры</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Скорер</th><th class="num">Средняя оценка</th><th class="num">Pass rate</th></tr></thead>
+    <tbody>
+      <tr><td><code>json_schema</code></td>
+        <td class="num">0.833</td>
+        <td class="num">83.3%</td></tr>
+      <tr><td><code>json_match</code></td>
+        <td class="num">0.917</td>
+        <td class="num">66.7%</td></tr>
+    </tbody>
+  </table></div>
+
+
+  <h2>Кейсы (6)</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Кейс</th><th>Статус</th>
+<th class="num">json_schema</th><th class="num">json_match</th>      <th class="num">мс</th><th>Ответ</th></tr></thead>
+    <tbody>
+      <tr><td><code>ex-ru-full</code></td>
+        <td><span class="badge b-pass">PASS</span></td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+        <td class="num">0.3</td>
+        <td class="out">
+          {&#34;name&#34;: &#34;Алия Каримова&#34;, &#34;email&#34;: &#34;aliya.karimova@example.uz&#34;, &#34;phone&#34;: &#34;+998901234567&#34;, &#34;age&#34;: 29}
+          <details><summary>подробнее</summary>
+            <div><strong>Вход</strong><pre>Здравствуйте! Меня зовут Алия Каримова, мне 29 лет. Почта aliya.karimova@example.uz, телефон +998 90 123-45-67.</pre></div>
+            <div><strong>Ожидалось</strong><pre>{
+  &#34;name&#34;: &#34;Алия Каримова&#34;,
+  &#34;email&#34;: &#34;aliya.karimova@example.uz&#34;,
+  &#34;phone&#34;: &#34;+998901234567&#34;,
+  &#34;age&#34;: 29
+}</pre></div>
+            <div><strong>Ответ</strong><pre>{&#34;name&#34;: &#34;Алия Каримова&#34;, &#34;email&#34;: &#34;aliya.karimova@example.uz&#34;, &#34;phone&#34;: &#34;+998901234567&#34;, &#34;age&#34;: 29}</pre></div>
+            <div><strong>json_schema</strong><pre>{
+  &#34;errors&#34;: []
+}</pre></div>
+            <div><strong>json_match</strong><pre>{
+  &#34;mismatched&#34;: {}
+}</pre></div>
+          </details>
+        </td></tr>
+      <tr><td><code>ex-en-full</code></td>
+        <td><span class="badge b-pass">PASS</span></td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+        <td class="num">0.1</td>
+        <td class="out">
+          {&#34;name&#34;: &#34;John Smith&#34;, &#34;email&#34;: &#34;john.smith@mail.com&#34;, &#34;phone&#34;: &#34;+14155550199&#34;, &#34;age&#34;: 41}
+          <details><summary>подробнее</summary>
+            <div><strong>Вход</strong><pre>Hi, my name is John Smith, I&#39;m 41 years old. Reach me at John.Smith@Mail.com or +1 (415) 555-0199.</pre></div>
+            <div><strong>Ожидалось</strong><pre>{
+  &#34;name&#34;: &#34;John Smith&#34;,
+  &#34;email&#34;: &#34;john.smith@mail.com&#34;,
+  &#34;phone&#34;: &#34;+14155550199&#34;,
+  &#34;age&#34;: 41
+}</pre></div>
+            <div><strong>Ответ</strong><pre>{&#34;name&#34;: &#34;John Smith&#34;, &#34;email&#34;: &#34;john.smith@mail.com&#34;, &#34;phone&#34;: &#34;+14155550199&#34;, &#34;age&#34;: 41}</pre></div>
+            <div><strong>json_schema</strong><pre>{
+  &#34;errors&#34;: []
+}</pre></div>
+            <div><strong>json_match</strong><pre>{
+  &#34;mismatched&#34;: {}
+}</pre></div>
+          </details>
+        </td></tr>
+      <tr><td><code>ex-ru-no-phone</code></td>
+        <td><span class="badge b-pass">PASS</span></td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+        <td class="num">0.0</td>
+        <td class="out">
+          {&#34;name&#34;: &#34;Дмитрий&#34;, &#34;email&#34;: &#34;hr@company.ru&#34;, &#34;phone&#34;: null, &#34;age&#34;: 35}
+          <details><summary>подробнее</summary>
+            <div><strong>Вход</strong><pre>Пишите на hr@company.ru — меня зовут Дмитрий, 35 лет.</pre></div>
+            <div><strong>Ожидалось</strong><pre>{
+  &#34;name&#34;: &#34;Дмитрий&#34;,
+  &#34;email&#34;: &#34;hr@company.ru&#34;,
+  &#34;phone&#34;: null,
+  &#34;age&#34;: 35
+}</pre></div>
+            <div><strong>Ответ</strong><pre>{&#34;name&#34;: &#34;Дмитрий&#34;, &#34;email&#34;: &#34;hr@company.ru&#34;, &#34;phone&#34;: null, &#34;age&#34;: 35}</pre></div>
+            <div><strong>json_schema</strong><pre>{
+  &#34;errors&#34;: []
+}</pre></div>
+            <div><strong>json_match</strong><pre>{
+  &#34;mismatched&#34;: {}
+}</pre></div>
+          </details>
+        </td></tr>
+      <tr><td><code>ex-en-no-age</code></td>
+        <td><span class="badge b-pass">PASS</span></td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+        <td class="num">0.1</td>
+        <td class="out">
+          {&#34;name&#34;: &#34;Maria Garcia&#34;, &#34;email&#34;: &#34;maria.garcia@uni.edu&#34;, &#34;phone&#34;: &#34;88005553535&#34;, &#34;age&#34;: null}
+          <details><summary>подробнее</summary>
+            <div><strong>Вход</strong><pre>Contact: Maria Garcia, maria.garcia@uni.edu, phone 8 800 555 35 35</pre></div>
+            <div><strong>Ожидалось</strong><pre>{
+  &#34;name&#34;: &#34;Maria Garcia&#34;,
+  &#34;email&#34;: &#34;maria.garcia@uni.edu&#34;,
+  &#34;phone&#34;: &#34;88005553535&#34;,
+  &#34;age&#34;: null
+}</pre></div>
+            <div><strong>Ответ</strong><pre>{&#34;name&#34;: &#34;Maria Garcia&#34;, &#34;email&#34;: &#34;maria.garcia@uni.edu&#34;, &#34;phone&#34;: &#34;88005553535&#34;, &#34;age&#34;: null}</pre></div>
+            <div><strong>json_schema</strong><pre>{
+  &#34;errors&#34;: []
+}</pre></div>
+            <div><strong>json_match</strong><pre>{
+  &#34;mismatched&#34;: {}
+}</pre></div>
+          </details>
+        </td></tr>
+      <tr><td><code>ex-ru-informal</code></td>
+        <td><span class="badge b-fail">FAIL</span></td>
+          <td class="num s-bad">0.00</td>
+          <td class="num s-bad">0.75</td>
+        <td class="num">0.0</td>
+        <td class="out">
+          {&#34;name&#34;: null, &#34;email&#34;: &#34;timur_22@mail.ru&#34;, &#34;phone&#34;: null, &#34;age&#34;: 22}
+          <details><summary>подробнее</summary>
+            <div><strong>Вход</strong><pre>Я Тимур, мне 22 года, email: timur_22@mail.ru</pre></div>
+            <div><strong>Ожидалось</strong><pre>{
+  &#34;name&#34;: &#34;Тимур&#34;,
+  &#34;email&#34;: &#34;timur_22@mail.ru&#34;,
+  &#34;phone&#34;: null,
+  &#34;age&#34;: 22
+}</pre></div>
+            <div><strong>Ответ</strong><pre>{&#34;name&#34;: null, &#34;email&#34;: &#34;timur_22@mail.ru&#34;, &#34;phone&#34;: null, &#34;age&#34;: 22}</pre></div>
+            <div><strong>json_schema</strong><pre>{
+  &#34;errors&#34;: [
+    &#34;$.name: ожидался тип string, получено NoneType&#34;
+  ]
+}</pre></div>
+            <div><strong>json_match</strong><pre>{
+  &#34;mismatched&#34;: {
+    &#34;name&#34;: {
+      &#34;expected&#34;: &#34;Тимур&#34;,
+      &#34;got&#34;: null
+    }
+  }
+}</pre></div>
+          </details>
+        </td></tr>
+      <tr><td><code>ex-en-obfuscated-email</code></td>
+        <td><span class="badge b-fail">FAIL</span></td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-bad">0.75</td>
+        <td class="num">0.0</td>
+        <td class="out">
+          {&#34;name&#34;: &#34;Alex Brown&#34;, &#34;email&#34;: null, &#34;phone&#34;: &#34;+442079460958&#34;, &#34;age&#34;: 30}
+          <details><summary>подробнее</summary>
+            <div><strong>Вход</strong><pre>I&#39;m Alex Brown, 30 y.o., email alex.brown(at)gmail.com, tel +44 20 7946 0958</pre></div>
+            <div><strong>Ожидалось</strong><pre>{
+  &#34;name&#34;: &#34;Alex Brown&#34;,
+  &#34;email&#34;: &#34;alex.brown@gmail.com&#34;,
+  &#34;phone&#34;: &#34;+442079460958&#34;,
+  &#34;age&#34;: 30
+}</pre></div>
+            <div><strong>Ответ</strong><pre>{&#34;name&#34;: &#34;Alex Brown&#34;, &#34;email&#34;: null, &#34;phone&#34;: &#34;+442079460958&#34;, &#34;age&#34;: 30}</pre></div>
+            <div><strong>json_schema</strong><pre>{
+  &#34;errors&#34;: []
+}</pre></div>
+            <div><strong>json_match</strong><pre>{
+  &#34;mismatched&#34;: {
+    &#34;email&#34;: {
+      &#34;expected&#34;: &#34;alex.brown@gmail.com&#34;,
+      &#34;got&#34;: null
+    }
+  }
+}</pre></div>
+          </details>
+        </td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Параметры прогона</h2>
+  <div class="tablewrap"><table><tbody>
+<tr><td><code>task</code></td><td>examples.tasks:extract_contact</td></tr><tr><td><code>dataset</code></td><td>json_extraction</td></tr><tr><td><code>dataset_path</code></td><td>data\evals\json_extraction.yaml</td></tr><tr><td><code>dataset_hash</code></td><td>b1ea4dbd6191</td></tr><tr><td><code>n_cases</code></td><td>6</td></tr><tr><td><code>scorers</code></td><td>[&#34;json_schema&#34;, &#34;json_match&#34;]</td></tr><tr><td><code>concurrency</code></td><td>4</td></tr><tr><td><code>retries</code></td><td>0</td></tr><tr><td><code>timeout</code></td><td>—</td></tr>  </tbody></table></div>
+
+  <footer>Сгенерировано mlops-tracker · самодостаточный HTML без внешних ресурсов</footer>
+</main>
+</body>
+</html>

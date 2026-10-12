@@ -1,0 +1,79 @@
+# Сгенерировано scripts/make_datasets.py. Схема из metadata применяется ко всем кейсам.
+name: json_extraction
+metadata:
+  schema:
+    type: object
+    required:
+    - name
+    - email
+    - phone
+    - age
+    additionalProperties: false
+    properties:
+      name:
+        type: string
+        minLength: 2
+      email:
+        type:
+        - string
+        - 'null'
+        pattern: ^[^@\s]+@[^@\s]+\.[a-z]{2,}$
+      phone:
+        type:
+        - string
+        - 'null'
+        pattern: ^\+?\d{9,15}$
+      age:
+        type:
+        - integer
+        - 'null'
+        minimum: 0
+        maximum: 120
+cases:
+- id: ex-ru-full
+  input: Здравствуйте! Меня зовут Алия Каримова, мне 29 лет. Почта aliya.karimova@example.uz, телефон
+    +998 90 123-45-67.
+  expected:
+    name: Алия Каримова
+    email: aliya.karimova@example.uz
+    phone: '+998901234567'
+    age: 29
+- id: ex-en-full
+  input: Hi, my name is John Smith, I'm 41 years old. Reach me at John.Smith@Mail.com or +1 (415) 555-0199.
+  expected:
+    name: John Smith
+    email: john.smith@mail.com
+    phone: '+14155550199'
+    age: 41
+- id: ex-ru-no-phone
+  input: Пишите на hr@company.ru — меня зовут Дмитрий, 35 лет.
+  expected:
+    name: Дмитрий
+    email: hr@company.ru
+    phone: null
+    age: 35
+- id: ex-en-no-age
+  input: 'Contact: Maria Garcia, maria.garcia@uni.edu, phone 8 800 555 35 35'
+  expected:
+    name: Maria Garcia
+    email: maria.garcia@uni.edu
+    phone: '88005553535'
+    age: null
+- id: ex-ru-informal
+  input: 'Я Тимур, мне 22 года, email: timur_22@mail.ru'
+  expected:
+    name: Тимур
+    email: timur_22@mail.ru
+    phone: null
+    age: 22
+  metadata:
+    note: имя без маркера «меня зовут» — сложный кейс
+- id: ex-en-obfuscated-email
+  input: I'm Alex Brown, 30 y.o., email alex.brown(at)gmail.com, tel +44 20 7946 0958
+  expected:
+    name: Alex Brown
+    email: alex.brown@gmail.com
+    phone: '+442079460958'
+    age: 30
+  metadata:
+    note: email замаскирован (at) — сложный кейс

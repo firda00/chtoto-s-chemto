@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eval-отчёт · mock-agent</title>
+<style>
+:root {
+  --bg: #f7f7f5; --panel: #ffffff; --text: #1d1d1b; --muted: #6b6b66; --line: #e4e4df;
+  --pass: #1f7a4d; --pass-bg: #e6f4ec; --fail: #b3261e; --fail-bg: #fbe9e7;
+  --warn: #8a5a00; --warn-bg: #fff4d6; --accent: #2f5bd3; --code: #f0f0ec;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141413; --panel: #1d1d1b; --text: #ecece8; --muted: #9b9b95; --line: #2e2e2b;
+    --pass: #5cc98d; --pass-bg: #16301f; --fail: #ff8a80; --fail-bg: #3a1714;
+    --warn: #ffcc66; --warn-bg: #3a2c0c; --accent: #8fb0ff; --code: #262624;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 14px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+main { max-width: 1200px; margin: 0 auto; padding: 32px 16px 64px; }
+h1 { font-size: 24px; margin: 0 0 4px; }
+h2 { font-size: 18px; margin: 36px 0 12px; }
+.meta { color: var(--muted); }
+.meta code, td code { background: var(--code); padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 20px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.card .k { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+.card .v { font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.tablewrap { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+.num { text-align: right; white-space: nowrap; }
+.badge { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.b-pass { color: var(--pass); background: var(--pass-bg); }
+.b-fail, .b-error, .b-regression { color: var(--fail); background: var(--fail-bg); }
+.b-fixed { color: var(--pass); background: var(--pass-bg); }
+.b-added, .b-removed, .b-still_failing, .b-still_passing { color: var(--muted); background: var(--code); }
+tr.regression td { background: var(--fail-bg); }
+tr.fixed td { background: var(--pass-bg); }
+.s-ok { color: var(--pass); } .s-bad { color: var(--fail); font-weight: 600; }
+.better { color: var(--pass); } .worse { color: var(--fail); font-weight: 600; }
+.warn { background: var(--warn-bg); color: var(--warn); padding: 10px 14px; border-radius: 8px; margin: 12px 0; }
+details summary { cursor: pointer; color: var(--accent); }
+pre { background: var(--code); padding: 8px 10px; border-radius: 6px; white-space: pre-wrap; word-break: break-word; margin: 6px 0; font-size: 12px; }
+.out { max-width: 380px; word-break: break-word; }
+footer { margin-top: 40px; color: var(--muted); font-size: 12px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Eval-отчёт: mock-agent</h1>
+  <div class="meta">
+    Ран <code>093716c9776e</code> · task <code>examples.tasks:mock_agent</code> ·
+    датасет <code>qa</code> (hash <code>39cf53cf863b</code>) ·
+    2026-10-12T18:29:07+00:00 · 0.01 с
+  </div>
+
+  <section class="cards">
+    <div class="card"><div class="k">pass_rate</div><div class="v">83.3%</div></div>
+    <div class="card"><div class="k">n_passed</div><div class="v">10</div></div>
+    <div class="card"><div class="k">n_cases</div><div class="v">12</div></div>
+    <div class="card"><div class="k">error_rate</div><div class="v">0.0%</div></div>
+    <div class="card"><div class="k">latency_ms_p50</div><div class="v">2.39</div></div>
+    <div class="card"><div class="k">latency_ms_p95</div><div class="v">3.18</div></div>
+    <div class="card"><div class="k">cost_usd_total</div><div class="v">$0.000184</div></div>
+    <div class="card"><div class="k">tokens_prompt</div><div class="v">1544</div></div>
+    <div class="card"><div class="k">tokens_completion</div><div class="v">536</div></div>
+  </section>
+
+  <h2>Скореры</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Скорер</th><th class="num">Средняя оценка</th><th class="num">Pass rate</th></tr></thead>
+    <tbody>
+      <tr><td><code>contains</code></td>
+        <td class="num">0.833</td>
+        <td class="num">83.3%</td></tr>
+      <tr><td><code>llm_judge</code></td>
+        <td class="num">0.833</td>
+        <td class="num">83.3%</td></tr>
+      <tr><td><code>cost</code></td>
+        <td class="num">1.000</td>
+        <td class="num">100.0%</td></tr>
+      <tr><td><code>latency</code></td>
+        <td class="num">1.000</td>
+        <td class="num">100.0%</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Сравнение с базовым раном</h2>
+  <div class="meta">
+    <code>baseline</code> (798826923749) → <code>mock-agent</code> (093716c9776e) ·
+    регрессий: <strong class="worse">1</strong> ·
+    исправлено: <strong class="better">1</strong>
+  </div>
+  <div class="tablewrap" style="margin-top:12px"><table>
+    <thead><tr><th>Метрика</th><th class="num">База</th><th class="num">Новый</th><th class="num">Δ</th></tr></thead>
+    <tbody>
+      <tr><td>contains/mean</td><td class="num">0.833</td><td class="num">0.833</td>
+        <td class="num ">+0</td></tr>
+      <tr><td>cost/mean</td><td class="num">—</td><td class="num">1.000</td>
+        <td class="num ">—</td></tr>
+      <tr><td>cost_usd_total</td><td class="num">—</td><td class="num">$0.000184</td>
+        <td class="num ">—</td></tr>
+      <tr><td>error_rate</td><td class="num">0.0%</td><td class="num">0.0%</td>
+        <td class="num ">+0.0%</td></tr>
+      <tr><td>latency/mean</td><td class="num">—</td><td class="num">1.000</td>
+        <td class="num ">—</td></tr>
+      <tr><td>latency_ms_p50</td><td class="num">0.06</td><td class="num">2.39</td>
+        <td class="num worse">+2.337</td></tr>
+      <tr><td>latency_ms_p95</td><td class="num">0.27</td><td class="num">3.18</td>
+        <td class="num worse">+2.912</td></tr>
+      <tr><td>llm_judge/mean</td><td class="num">0.812</td><td class="num">0.833</td>
+        <td class="num better">+0.021</td></tr>
+      <tr><td>n_cases</td><td class="num">12</td><td class="num">12</td>
+        <td class="num ">+0</td></tr>
+      <tr><td>n_passed</td><td class="num">10</td><td class="num">10</td>
+        <td class="num ">+0</td></tr>
+      <tr><td>pass_rate</td><td class="num">83.3%</td><td class="num">83.3%</td>
+        <td class="num ">+0.0%</td></tr>
+      <tr><td>tokens_completion</td><td class="num">0</td><td class="num">536</td>
+        <td class="num worse">+536</td></tr>
+      <tr><td>tokens_prompt</td><td class="num">0</td><td class="num">1544</td>
+        <td class="num worse">+1544</td></tr>
+    </tbody>
+  </table></div>
+  <div class="tablewrap" style="margin-top:12px"><table>
+    <thead><tr><th>Кейс</th><th>Изменение</th><th>Δ скоров</th><th>Было</th><th>Стало</th></tr></thead>
+    <tbody>
+      <tr class="still_passing"><td><code>qa-capital-fr</code></td>
+        <td><span class="badge b-still_passing">ок (без изм.)</span></td>
+        <td></td>
+        <td class="out">The capital of France is Paris.</td><td class="out">The capital of France is Paris.</td></tr>
+      <tr class="still_passing"><td><code>qa-capital-uz</code></td>
+        <td><span class="badge b-still_passing">ок (без изм.)</span></td>
+        <td></td>
+        <td class="out">Столица Узбекистана — Ташкент.</td><td class="out">Столица Узбекистана — Ташкент.</td></tr>
+      <tr class="still_passing"><td><code>qa-math-mul</code></td>
+        <td><span class="badge b-still_passing">ок (без изм.)</span></td>
+        <td></td>
+        <td class="out">Ответ: 51</td><td class="out">Ответ: 51</td></tr>
+      <tr class="fixed"><td><code>qa-math-precedence</code></td>
+        <td><span class="badge b-fixed">исправлено</span></td>
+        <td><div class="better">contains +1.00</div><div class="better">llm_judge +1.00</div></td>
+        <td class="out">Ответ: 8</td><td class="out">Answer: 6</td></tr>
+      <tr class="still_passing"><td><code>qa-tolstoy</code></td>
+        <td><span class="badge b-still_passing">ок (без изм.)</span></td>
+        <td></td>
+        <td class="out">«Войну и мир» написал Лев Толстой.</td><td class="out">«Войну и мир» написал Лев Толстой.</td></tr>
+      <tr class="still_passing"><td><code>qa-einstein</code></td>
+        <td><span class="badge b-still_passing">ок (без изм.)</span></td>
+        <td></td>
+        <td class="out">The theory of relativity was developed by Albert Einstein.</td><td class="out">The theory of relativity was developed by Albert Einstein.</td></tr>
+      <tr class="still_passing"><td><code>qa-project-lang</code></td>
+        <td><span class="badge b-still_passing">ок (без изм.)</span></td>
+        <td></td>
+        <td class="out">Этот проект написан на Python 3.12.</td><td class="out">Этот проект написан на Python 3.12.</td></tr>
+      <tr class="still_passing"><td><code>qa-rag</code></td>
+        <td><span class="badge b-still_passing">ок (без изм.)</span></td>
+        <td></td>
+        <td class="out">RAG stands for Retrieval-Augmented Generation.</td><td class="out">RAG stands for Retrieval-Augmented Generation.</td></tr>
+      <tr class="still_passing"><td><code>qa-planets</code></td>
+        <td><span class="badge b-still_passing">ок (без изм.)</span></td>
+        <td></td>
+        <td class="out">В Солнечной системе 8 планет.</td><td class="out">В Солнечной системе 8 планет.</td></tr>
+      <tr class="still_passing"><td><code>qa-boiling</code></td>
+        <td><span class="badge b-still_passing">ок (без изм.)</span></td>
+        <td></td>
+        <td class="out">Water boils at 100 °C at sea level.</td><td class="out">Water boils at 100 °C at sea level.</td></tr>
+      <tr class="regression"><td><code>qa-mlops</code></td>
+        <td><span class="badge b-regression">РЕГРЕССИЯ</span></td>
+        <td><div class="worse">contains -1.00</div><div class="worse">llm_judge -0.75</div></td>
+        <td class="out">MLOps — практики эксплуатации моделей машинного обучения в продакшене.</td><td class="out">Не знаю.</td></tr>
+      <tr class="still_failing"><td><code>qa-nile</code></td>
+        <td><span class="badge b-still_failing">провал (без изм.)</span></td>
+        <td></td>
+        <td class="out">Не знаю.</td><td class="out">Не знаю.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Кейсы (12)</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Кейс</th><th>Статус</th>
+<th class="num">contains</th><th class="num">llm_judge</th><th class="num">cost</th><th class="num">latency</th>      <th class="num">мс</th><th>Ответ</th></tr></thead>
+    <tbody>
+      <tr><td><code>qa-capital-fr</code></td>
+        <td><span class="badge b-pass">PASS</span></td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+        <td class="num">1.4</td>
+        <td class="out">
+          The capital of France is Paris.
+          <details><summary>подробнее</summary>
+            <div><strong>Вход</strong><pre>What is the capital of France?</pre></div>
+            <div><strong>Ожидалось</strong><pre>Paris</pre></div>
+            <div><strong>Ответ</strong><pre>The capital of France is Paris.</pre></div>
+            <div><strong>contains</strong><pre>{
+  &#34;found&#34;: [
+    &#34;Paris&#34;
+  ],
+  &#34;missing&#34;: []
+}</pre></div>
+            <div><strong>llm_judge</strong><pre>{
+  &#34;judge_score&#34;: 5,
+  &#34;reason&#34;: &#34;mock: совпало 100% слов эталона&#34;,
+  &#34;judge_model&#34;: &#34;mock-llm&#34;
+}</pre></div>
+            <div><strong>cost</strong><pre>{
+  &#34;cost_usd&#34;: 1.575e-05,
+  &#34;max_usd&#34;: 0.01,
+  &#34;tokens&#34;: {
+    &#34;prompt_tokens&#34;: 131,
+    &#34;completion_tokens&#34;: 46
+  }
+}</pre></div>
+            <div><strong>latency</strong><pre>{
+  &#34;latency_ms&#34;: 1.43,
+  &#34;max_ms&#34;: 2000.0
+}</pre></div>
+<div><strong>Трейс task</strong><pre>{
+  &#34;steps&#34;: 2,
+  &#34;trace&#34;: [
+    {
+      &#34;action&#34;: &#34;kb&#34;,
+      &#34;input&#34;: &#34;What is the capital of France?&#34;,
+      &#34;observation&#34;: &#34;The capital of France is Paris.&#34;
+    },
+    {
+      &#34;action&#34;: &#34;final&#34;,
+      &#34;input&#34;: &#34;The capital of France is Paris.&#34;
+    }
+  ],
+  &#34;model&#34;: &#34;mock-llm&#34;
+}</pre></div>          </details>
+        </td></tr>
+      <tr><td><code>qa-capital-uz</code></td>
+        <td><span class="badge b-pass">PASS</span></td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+        <td class="num">2.6</td>
+        <td class="out">
+          Столица Узбекистана — Ташкент.
+          <details><summary>подробнее</summary>
+            <div><strong>Вход</strong><pre>Какая столица у Узбекистана?</pre></div>
+            <div><strong>Ожидалось</strong><pre>Ташкент</pre></div>
+            <div><strong>Ответ</strong><pre>Столица Узбекистана — Ташкент.</pre></div>
+            <div><strong>contains</strong><pre>{
+  &#34;found&#34;: [
+    &#34;Ташкент&#34;
+  ],
+  &#34;missing&#34;: []
+}</pre></div>
+            <div><strong>llm_judge</strong><pre>{
+  &#34;judge_score&#34;: 5,
+  &#34;reason&#34;: &#34;mock: совпало 100% слов эталона&#34;,
+  &#34;judge_model&#34;: &#34;mock-llm&#34;
+}</pre></div>
+            <div><strong>cost</strong><pre>{
+  &#34;cost_usd&#34;: 1.4550000000000001e-05,
+  &#34;max_usd&#34;: 0.01,
+  &#34;tokens&#34;: {
+    &#34;prompt_tokens&#34;: 123,
+    &#34;completion_tokens&#34;: 42
+  }
+}</pre></div>
+            <div><strong>latency</strong><pre>{
+  &#34;latency_ms&#34;: 2.62,
+  &#34;max_ms&#34;: 2000.0
+}</pre></div>
+<div><strong>Трейс task</strong><pre>{
+  &#34;steps&#34;: 2,
+  &#34;trace&#34;: [
+    {
+      &#34;action&#34;: &#34;kb&#34;,
+      &#34;input&#34;: &#34;Какая столица у Узбекистана?&#34;,
+      &#34;observation&#34;: &#34;Столица Узбекистана — Ташкент.&#34;
+    },
+    {
+      &#34;action&#34;: &#34;final&#34;,
+      &#34;input&#34;: &#34;Столица Узбекистана — Ташкент.&#34;
+    }
+  ],
+  &#34;model&#34;: &#34;mock-llm&#34;
+}</pre></div>          </details>
+        </td></tr>
+      <tr><td><code>qa-math-mul</code></td>
+        <td><span class="badge b-pass">PASS</span></td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+        <td class="num">1.9</td>
+        <td class="out">
+          Ответ: 51
+          <details><summary>подробнее</summary>
+            <div><strong>Вход</strong><pre>Сколько будет 17 * 3?</pre></div>
+            <div><strong>Ожидалось</strong><pre>51</pre></div>
+            <div><strong>Ответ</strong><pre>Ответ: 51</pre></div>
+            <div><strong>contains</strong><pre>{
+  &#34;found&#34;: [
+    &#34;51&#34;
+  ],
+  &#34;missing&#34;: []
+}</pre></div>
+            <div><strong>llm_judge</strong><pre>{
+  &#34;judge_score&#34;: 5,
+  &#34;reason&#34;: &#34;mock: совпало 100% слов эталона&#34;,
+  &#34;judge_model&#34;: &#34;mock-llm&#34;
+}</pre></div>
+            <div><strong>cost</strong><pre>{
+  &#34;cost_usd&#34;: 1.355e-05,
+  &#34;max_usd&#34;: 0.01,
+  &#34;tokens&#34;: {
+    &#34;prompt_tokens&#34;: 119,
+    &#34;completion_tokens&#34;: 38
+  }
+}</pre></div>
+            <div><strong>latency</strong><pre>{
+  &#34;latency_ms&#34;: 1.88,
+  &#34;max_ms&#34;: 2000.0
+}</pre></div>
+<div><strong>Трейс task</strong><pre>{
+  &#34;steps&#34;: 2,
+  &#34;trace&#34;: [
+    {
+      &#34;action&#34;: &#34;calculator&#34;,
+      &#34;input&#34;: &#34;17 * 3&#34;,
+      &#34;observation&#34;: &#34;51&#34;
+    },
+    {
+      &#34;action&#34;: &#34;final&#34;,
+      &#34;input&#34;: &#34;Ответ: 51&#34;
+    }
+  ],
+  &#34;model&#34;: &#34;mock-llm&#34;
+}</pre></div>          </details>
+        </td></tr>
+      <tr><td><code>qa-math-precedence</code></td>
+        <td><span class="badge b-pass">PASS</span></td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+        <td class="num">3.0</td>
+        <td class="out">
+          Answer: 6
+          <details><summary>подробнее</summary>
+            <div><strong>Вход</strong><pre>What is 2 + 2 * 2?</pre></div>
+            <div><strong>Ожидалось</strong><pre>6</pre></div>
+            <div><strong>Ответ</strong><pre>Answer: 6</pre></div>
+            <div><strong>contains</strong><pre>{
+  &#34;found&#34;: [
+    &#34;6&#34;
+  ],
+  &#34;missing&#34;: []
+}</pre></div>
+            <div><strong>llm_judge</strong><pre>{
+  &#34;judge_score&#34;: 5,
+  &#34;reason&#34;: &#34;mock: совпало 100% слов эталона&#34;,
+  &#34;judge_model&#34;: &#34;mock-llm&#34;
+}</pre></div>
+            <div><strong>cost</strong><pre>{
+  &#34;cost_usd&#34;: 1.425e-05,
+  &#34;max_usd&#34;: 0.01,
+  &#34;tokens&#34;: {
+    &#34;prompt_tokens&#34;: 125,
+    &#34;completion_tokens&#34;: 40
+  }
+}</pre></div>
+            <div><strong>latency</strong><pre>{
+  &#34;latency_ms&#34;: 2.96,
+  &#34;max_ms&#34;: 2000.0
+}</pre></div>
+<div><strong>Трейс task</strong><pre>{
+  &#34;steps&#34;: 2,
+  &#34;trace&#34;: [
+    {
+      &#34;action&#34;: &#34;calculator&#34;,
+      &#34;input&#34;: &#34;2 + 2 * 2&#34;,
+      &#34;observation&#34;: &#34;6&#34;
+    },
+    {
+      &#34;action&#34;: &#34;final&#34;,
+      &#34;input&#34;: &#34;Answer: 6&#34;
+    }
+  ],
+  &#34;model&#34;: &#34;mock-llm&#34;
+}</pre></div>          </details>
+        </td></tr>
+      <tr><td><code>qa-tolstoy</code></td>
+        <td><span class="badge b-pass">PASS</span></td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+        <td class="num">2.4</td>
+        <td class="out">
+          «Войну и мир» написал Лев Толстой.
+          <details><summary>подробнее</summary>
+            <div><strong>Вход</strong><pre>Кто написал «Войну и мир»?</pre></div>
+            <div><strong>Ожидалось</strong><pre>Толстой</pre></div>
+            <div><strong>Ответ</strong><pre>«Войну и мир» написал Лев Толстой.</pre></div>
+            <div><strong>contains</strong><pre>{
+  &#34;found&#34;: [
+    &#34;Толстой&#34;
+  ],
+  &#34;missing&#34;: []
+}</pre></div>
+            <div><strong>llm_judge</strong><pre>{
+  &#34;judge_score&#34;: 5,
+  &#34;reason&#34;: &#34;mock: совпало 100% слов эталона&#34;,
+  &#34;judge_model&#34;: &#34;mock-llm&#34;
+}</pre></div>
+            <div><strong>cost</strong><pre>{
+  &#34;cost_usd&#34;: 1.6600000000000004e-05,
+  &#34;max_usd&#34;: 0.01,
+  &#34;tokens&#34;: {
+    &#34;prompt_tokens&#34;: 136,
+    &#34;completion_tokens&#34;: 49
+  }
+}</pre></div>
+            <div><strong>latency</strong><pre>{
+  &#34;latency_ms&#34;: 2.35,
+  &#34;max_ms&#34;: 2000.0
+}</pre></div>
+<div><strong>Трейс task</strong><pre>{
+  &#34;steps&#34;: 2,
+  &#34;trace&#34;: [
+    {
+      &#34;action&#34;: &#34;kb&#34;,
+      &#34;input&#34;: &#34;Кто написал «Войну и мир»?&#34;,
+      &#34;observation&#34;: &#34;«Войну и мир» написал Лев Толстой.&#34;
+    },
+    {
+      &#34;action&#34;: &#34;final&#34;,
+      &#34;input&#34;: &#34;«Войну и мир» написал Лев Толстой.&#34;
+    }
+  ],
+  &#34;model&#34;: &#34;mock-llm&#34;
+}</pre></div>          </details>
+        </td></tr>
+      <tr><td><code>qa-einstein</code></td>
+        <td><span class="badge b-pass">PASS</span></td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+        <td class="num">2.1</td>
+        <td class="out">
+          The theory of relativity was developed by Albert Einstein.
+          <details><summary>подробнее</summary>
+            <div><strong>Вход</strong><pre>Who developed the theory of relativity?</pre></div>
+            <div><strong>Ожидалось</strong><pre>Einstein</pre></div>
+            <div><strong>Ответ</strong><pre>The theory of relativity was developed by Albert Einstein.</pre></div>
+            <div><strong>contains</strong><pre>{
+  &#34;found&#34;: [
+    &#34;Einstein&#34;
+  ],
+  &#34;missing&#34;: []
+}</pre></div>
+            <div><strong>llm_judge</strong><pre>{
+  &#34;judge_score&#34;: 5,
+  &#34;reason&#34;: &#34;mock: совпало 100% слов эталона&#34;,
+  &#34;judge_model&#34;: &#34;mock-llm&#34;
+}</pre></div>
+            <div><strong>cost</strong><pre>{
+  &#34;cost_usd&#34;: 1.65e-05,
+  &#34;max_usd&#34;: 0.01,
+  &#34;tokens&#34;: {
+    &#34;prompt_tokens&#34;: 134,
+    &#34;completion_tokens&#34;: 49
+  }
+}</pre></div>
+            <div><strong>latency</strong><pre>{
+  &#34;latency_ms&#34;: 2.12,
+  &#34;max_ms&#34;: 2000.0
+}</pre></div>
+<div><strong>Трейс task</strong><pre>{
+  &#34;steps&#34;: 2,
+  &#34;trace&#34;: [
+    {
+      &#34;action&#34;: &#34;kb&#34;,
+      &#34;input&#34;: &#34;Who developed the theory of relativity?&#34;,
+      &#34;observation&#34;: &#34;The theory of relativity was developed by Albert Einstein.&#34;
+    },
+    {
+      &#34;action&#34;: &#34;final&#34;,
+      &#34;input&#34;: &#34;The theory of relativity was developed by Albert Einstein.&#34;
+    }
+  ],
+  &#34;model&#34;: &#34;mock-llm&#34;
+}</pre></div>          </details>
+        </td></tr>
+      <tr><td><code>qa-project-lang</code></td>
+        <td><span class="badge b-pass">PASS</span></td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+        <td class="num">2.2</td>
+        <td class="out">
+          Этот проект написан на Python 3.12.
+          <details><summary>подробнее</summary>
+            <div><strong>Вход</strong><pre>На каком языке написан этот проект?</pre></div>
+            <div><strong>Ожидалось</strong><pre>Python</pre></div>
+            <div><strong>Ответ</strong><pre>Этот проект написан на Python 3.12.</pre></div>
+            <div><strong>contains</strong><pre>{
+  &#34;found&#34;: [
+    &#34;Python&#34;
+  ],
+  &#34;missing&#34;: []
+}</pre></div>
+            <div><strong>llm_judge</strong><pre>{
+  &#34;judge_score&#34;: 5,
+  &#34;reason&#34;: &#34;mock: совпало 100% слов эталона&#34;,
+  &#34;judge_model&#34;: &#34;mock-llm&#34;
+}</pre></div>
+            <div><strong>cost</strong><pre>{
+  &#34;cost_usd&#34;: 1.6250000000000002e-05,
+  &#34;max_usd&#34;: 0.01,
+  &#34;tokens&#34;: {
+    &#34;prompt_tokens&#34;: 133,
+    &#34;completion_tokens&#34;: 48
+  }
+}</pre></div>
+            <div><strong>latency</strong><pre>{
+  &#34;latency_ms&#34;: 2.21,
+  &#34;max_ms&#34;: 2000.0
+}</pre></div>
+<div><strong>Трейс task</strong><pre>{
+  &#34;steps&#34;: 2,
+  &#34;trace&#34;: [
+    {
+      &#34;action&#34;: &#34;kb&#34;,
+      &#34;input&#34;: &#34;На каком языке написан этот проект?&#34;,
+      &#34;observation&#34;: &#34;Этот проект написан на Python 3.12.&#34;
+    },
+    {
+      &#34;action&#34;: &#34;final&#34;,
+      &#34;input&#34;: &#34;Этот проект написан на Python 3.12.&#34;
+    }
+  ],
+  &#34;model&#34;: &#34;mock-llm&#34;
+}</pre></div>          </details>
+        </td></tr>
+      <tr><td><code>qa-rag</code></td>
+        <td><span class="badge b-pass">PASS</span></td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+        <td class="num">2.3</td>
+        <td class="out">
+          RAG stands for Retrieval-Augmented Generation.
+          <details><summary>подробнее</summary>
+            <div><strong>Вход</strong><pre>What does RAG stand for?</pre></div>
+            <div><strong>Ожидалось</strong><pre>[
+  &#34;Retrieval&#34;,
+  &#34;Generation&#34;
+]</pre></div>
+            <div><strong>Ответ</strong><pre>RAG stands for Retrieval-Augmented Generation.</pre></div>
+            <div><strong>contains</strong><pre>{
+  &#34;found&#34;: [
+    &#34;Retrieval&#34;,
+    &#34;Generation&#34;
+  ],
+  &#34;missing&#34;: []
+}</pre></div>
+            <div><strong>llm_judge</strong><pre>{
+  &#34;judge_score&#34;: 5,
+  &#34;reason&#34;: &#34;mock: совпало 100% слов эталона&#34;,
+  &#34;judge_model&#34;: &#34;mock-llm&#34;
+}</pre></div>
+            <div><strong>cost</strong><pre>{
+  &#34;cost_usd&#34;: 1.565e-05,
+  &#34;max_usd&#34;: 0.01,
+  &#34;tokens&#34;: {
+    &#34;prompt_tokens&#34;: 129,
+    &#34;completion_tokens&#34;: 46
+  }
+}</pre></div>
+            <div><strong>latency</strong><pre>{
+  &#34;latency_ms&#34;: 2.26,
+  &#34;max_ms&#34;: 2000.0
+}</pre></div>
+<div><strong>Трейс task</strong><pre>{
+  &#34;steps&#34;: 2,
+  &#34;trace&#34;: [
+    {
+      &#34;action&#34;: &#34;kb&#34;,
+      &#34;input&#34;: &#34;What does RAG stand for?&#34;,
+      &#34;observation&#34;: &#34;RAG stands for Retrieval-Augmented Generation.&#34;
+    },
+    {
+      &#34;action&#34;: &#34;final&#34;,
+      &#34;input&#34;: &#34;RAG stands for Retrieval-Augmented Generation.&#34;
+    }
+  ],
+  &#34;model&#34;: &#34;mock-llm&#34;
+}</pre></div>          </details>
+        </td></tr>
+      <tr><td><code>qa-planets</code></td>
+        <td><span class="badge b-pass">PASS</span></td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+        <td class="num">2.4</td>
+        <td class="out">
+          В Солнечной системе 8 планет.
+          <details><summary>подробнее</summary>
+            <div><strong>Вход</strong><pre>Сколько планет в Солнечной системе?</pre></div>
+            <div><strong>Ожидалось</strong><pre>8</pre></div>
+            <div><strong>Ответ</strong><pre>В Солнечной системе 8 планет.</pre></div>
+            <div><strong>contains</strong><pre>{
+  &#34;found&#34;: [
+    &#34;8&#34;
+  ],
+  &#34;missing&#34;: []
+}</pre></div>
+            <div><strong>llm_judge</strong><pre>{
+  &#34;judge_score&#34;: 5,
+  &#34;reason&#34;: &#34;mock: совпало 100% слов эталона&#34;,
+  &#34;judge_model&#34;: &#34;mock-llm&#34;
+}</pre></div>
+            <div><strong>cost</strong><pre>{
+  &#34;cost_usd&#34;: 1.515e-05,
+  &#34;max_usd&#34;: 0.01,
+  &#34;tokens&#34;: {
+    &#34;prompt_tokens&#34;: 127,
+    &#34;completion_tokens&#34;: 44
+  }
+}</pre></div>
+            <div><strong>latency</strong><pre>{
+  &#34;latency_ms&#34;: 2.44,
+  &#34;max_ms&#34;: 2000.0
+}</pre></div>
+<div><strong>Трейс task</strong><pre>{
+  &#34;steps&#34;: 2,
+  &#34;trace&#34;: [
+    {
+      &#34;action&#34;: &#34;kb&#34;,
+      &#34;input&#34;: &#34;Сколько планет в Солнечной системе?&#34;,
+      &#34;observation&#34;: &#34;В Солнечной системе 8 планет.&#34;
+    },
+    {
+      &#34;action&#34;: &#34;final&#34;,
+      &#34;input&#34;: &#34;В Солнечной системе 8 планет.&#34;
+    }
+  ],
+  &#34;model&#34;: &#34;mock-llm&#34;
+}</pre></div>          </details>
+        </td></tr>
+      <tr><td><code>qa-boiling</code></td>
+        <td><span class="badge b-pass">PASS</span></td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+        <td class="num">2.7</td>
+        <td class="out">
+          Water boils at 100 °C at sea level.
+          <details><summary>подробнее</summary>
+            <div><strong>Вход</strong><pre>At what temperature does water start boiling, in Celsius?</pre></div>
+            <div><strong>Ожидалось</strong><pre>100</pre></div>
+            <div><strong>Ответ</strong><pre>Water boils at 100 °C at sea level.</pre></div>
+            <div><strong>contains</strong><pre>{
+  &#34;found&#34;: [
+    &#34;100&#34;
+  ],
+  &#34;missing&#34;: []
+}</pre></div>
+            <div><strong>llm_judge</strong><pre>{
+  &#34;judge_score&#34;: 5,
+  &#34;reason&#34;: &#34;mock: совпало 100% слов эталона&#34;,
+  &#34;judge_model&#34;: &#34;mock-llm&#34;
+}</pre></div>
+            <div><strong>cost</strong><pre>{
+  &#34;cost_usd&#34;: 1.79e-05,
+  &#34;max_usd&#34;: 0.01,
+  &#34;tokens&#34;: {
+    &#34;prompt_tokens&#34;: 146,
+    &#34;completion_tokens&#34;: 53
+  }
+}</pre></div>
+            <div><strong>latency</strong><pre>{
+  &#34;latency_ms&#34;: 2.72,
+  &#34;max_ms&#34;: 2000.0
+}</pre></div>
+<div><strong>Трейс task</strong><pre>{
+  &#34;steps&#34;: 2,
+  &#34;trace&#34;: [
+    {
+      &#34;action&#34;: &#34;kb&#34;,
+      &#34;input&#34;: &#34;At what temperature does water start boiling, in Celsius?&#34;,
+      &#34;observation&#34;: &#34;Water boils at 100 °C at sea level.&#34;
+    },
+    {
+      &#34;action&#34;: &#34;final&#34;,
+      &#34;input&#34;: &#34;Water boils at 100 °C at sea level.&#34;
+    }
+  ],
+  &#34;model&#34;: &#34;mock-llm&#34;
+}</pre></div>          </details>
+        </td></tr>
+      <tr><td><code>qa-mlops</code></td>
+        <td><span class="badge b-fail">FAIL</span></td>
+          <td class="num s-bad">0.00</td>
+          <td class="num s-bad">0.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+        <td class="num">3.1</td>
+        <td class="out">
+          Не знаю.
+          <details><summary>подробнее</summary>
+            <div><strong>Вход</strong><pre>Что такое MLOps?</pre></div>
+            <div><strong>Ожидалось</strong><pre>[
+  &#34;эксплуатац&#34;,
+  &#34;машинного обучения&#34;
+]</pre></div>
+            <div><strong>Ответ</strong><pre>Не знаю.</pre></div>
+            <div><strong>contains</strong><pre>{
+  &#34;found&#34;: [],
+  &#34;missing&#34;: [
+    &#34;эксплуатац&#34;,
+    &#34;машинного обучения&#34;
+  ]
+}</pre></div>
+            <div><strong>llm_judge</strong><pre>{
+  &#34;judge_score&#34;: 1,
+  &#34;reason&#34;: &#34;mock: совпало 0% слов эталона&#34;,
+  &#34;judge_model&#34;: &#34;mock-llm&#34;
+}</pre></div>
+            <div><strong>cost</strong><pre>{
+  &#34;cost_usd&#34;: 1.36e-05,
+  &#34;max_usd&#34;: 0.01,
+  &#34;tokens&#34;: {
+    &#34;prompt_tokens&#34;: 116,
+    &#34;completion_tokens&#34;: 39
+  }
+}</pre></div>
+            <div><strong>latency</strong><pre>{
+  &#34;latency_ms&#34;: 3.13,
+  &#34;max_ms&#34;: 2000.0
+}</pre></div>
+<div><strong>Трейс task</strong><pre>{
+  &#34;steps&#34;: 2,
+  &#34;trace&#34;: [
+    {
+      &#34;action&#34;: &#34;kb&#34;,
+      &#34;input&#34;: &#34;Что такое MLOps?&#34;,
+      &#34;observation&#34;: &#34;NOT_FOUND&#34;
+    },
+    {
+      &#34;action&#34;: &#34;final&#34;,
+      &#34;input&#34;: &#34;Не знаю.&#34;
+    }
+  ],
+  &#34;model&#34;: &#34;mock-llm&#34;
+}</pre></div>          </details>
+        </td></tr>
+      <tr><td><code>qa-nile</code></td>
+        <td><span class="badge b-fail">FAIL</span></td>
+          <td class="num s-bad">0.00</td>
+          <td class="num s-bad">0.00</td>
+          <td class="num s-ok">1.00</td>
+          <td class="num s-ok">1.00</td>
+        <td class="num">3.2</td>
+        <td class="out">
+          Не знаю.
+          <details><summary>подробнее</summary>
+            <div><strong>Вход</strong><pre>Какая самая длинная река в мире?</pre></div>
+            <div><strong>Ожидалось</strong><pre>Нил</pre></div>
+            <div><strong>Ответ</strong><pre>Не знаю.</pre></div>
+            <div><strong>contains</strong><pre>{
+  &#34;found&#34;: [],
+  &#34;missing&#34;: [
+    &#34;Нил&#34;
+  ]
+}</pre></div>
+            <div><strong>llm_judge</strong><pre>{
+  &#34;judge_score&#34;: 1,
+  &#34;reason&#34;: &#34;mock: совпало 0% слов эталона&#34;,
+  &#34;judge_model&#34;: &#34;mock-llm&#34;
+}</pre></div>
+            <div><strong>cost</strong><pre>{
+  &#34;cost_usd&#34;: 1.465e-05,
+  &#34;max_usd&#34;: 0.01,
+  &#34;tokens&#34;: {
+    &#34;prompt_tokens&#34;: 125,
+    &#34;completion_tokens&#34;: 42
+  }
+}</pre></div>
+            <div><strong>latency</strong><pre>{
+  &#34;latency_ms&#34;: 3.23,
+  &#34;max_ms&#34;: 2000.0
+}</pre></div>
+<div><strong>Трейс task</strong><pre>{
+  &#34;steps&#34;: 2,
+  &#34;trace&#34;: [
+    {
+      &#34;action&#34;: &#34;kb&#34;,
+      &#34;input&#34;: &#34;Какая самая длинная река в мире?&#34;,
+      &#34;observation&#34;: &#34;NOT_FOUND&#34;
+    },
+    {
+      &#34;action&#34;: &#34;final&#34;,
+      &#34;input&#34;: &#34;Не знаю.&#34;
+    }
+  ],
+  &#34;model&#34;: &#34;mock-llm&#34;
+}</pre></div>          </details>
+        </td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Параметры прогона</h2>
+  <div class="tablewrap"><table><tbody>
+<tr><td><code>task</code></td><td>examples.tasks:mock_agent</td></tr><tr><td><code>dataset</code></td><td>qa</td></tr><tr><td><code>dataset_path</code></td><td>data\evals\qa.jsonl</td></tr><tr><td><code>dataset_hash</code></td><td>39cf53cf863b</td></tr><tr><td><code>n_cases</code></td><td>12</td></tr><tr><td><code>scorers</code></td><td>[&#34;contains&#34;, &#34;llm_judge&#34;, &#34;cost&#34;, &#34;latency&#34;]</td></tr><tr><td><code>concurrency</code></td><td>4</td></tr><tr><td><code>retries</code></td><td>1</td></tr><tr><td><code>timeout</code></td><td>30.0</td></tr><tr><td><code>judge_model</code></td><td>mock-llm</td></tr>  </tbody></table></div>
+
+  <footer>Сгенерировано mlops-tracker · самодостаточный HTML без внешних ресурсов</footer>
+</main>
+</body>
+</html>

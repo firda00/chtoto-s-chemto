@@ -1,0 +1,12 @@
+{"id": "qa-capital-fr", "input": "What is the capital of France?", "expected": "Paris", "metadata": {"lang": "en", "topic": "geo"}}
+{"id": "qa-capital-uz", "input": "Какая столица у Узбекистана?", "expected": "Ташкент", "metadata": {"lang": "ru", "topic": "geo"}}
+{"id": "qa-math-mul", "input": "Сколько будет 17 * 3?", "expected": "51", "metadata": {"lang": "ru", "topic": "math"}}
+{"id": "qa-math-precedence", "input": "What is 2 + 2 * 2?", "expected": "6", "metadata": {"lang": "en", "topic": "math", "note": "проверка приоритета операций"}}
+{"id": "qa-tolstoy", "input": "Кто написал «Войну и мир»?", "expected": "Толстой", "metadata": {"lang": "ru", "topic": "literature"}}
+{"id": "qa-einstein", "input": "Who developed the theory of relativity?", "expected": "Einstein", "metadata": {"lang": "en", "topic": "science"}}
+{"id": "qa-project-lang", "input": "На каком языке написан этот проект?", "expected": "Python", "metadata": {"lang": "ru", "topic": "meta"}}
+{"id": "qa-rag", "input": "What does RAG stand for?", "expected": ["Retrieval", "Generation"], "metadata": {"lang": "en", "topic": "ml"}}
+{"id": "qa-planets", "input": "Сколько планет в Солнечной системе?", "expected": "8", "metadata": {"lang": "ru", "topic": "science"}}
+{"id": "qa-boiling", "input": "At what temperature does water start boiling, in Celsius?", "expected": "100", "metadata": {"lang": "en", "topic": "science"}}
+{"id": "qa-mlops", "input": "Что такое MLOps?", "expected": ["эксплуатац", "машинного обучения"], "metadata": {"lang": "ru", "topic": "ml"}}
+{"id": "qa-nile", "input": "Какая самая длинная река в мире?", "expected": "Нил", "metadata": {"lang": "ru", "topic": "geo", "note": "нет в базе знаний — ожидаемый провал"}}

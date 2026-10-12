@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eval-отчёт · {{ r.run_name }}</title>
+<style>
+:root {
+  --bg: #f7f7f5; --panel: #ffffff; --text: #1d1d1b; --muted: #6b6b66; --line: #e4e4df;
+  --pass: #1f7a4d; --pass-bg: #e6f4ec; --fail: #b3261e; --fail-bg: #fbe9e7;
+  --warn: #8a5a00; --warn-bg: #fff4d6; --accent: #2f5bd3; --code: #f0f0ec;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141413; --panel: #1d1d1b; --text: #ecece8; --muted: #9b9b95; --line: #2e2e2b;
+    --pass: #5cc98d; --pass-bg: #16301f; --fail: #ff8a80; --fail-bg: #3a1714;
+    --warn: #ffcc66; --warn-bg: #3a2c0c; --accent: #8fb0ff; --code: #262624;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 14px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+main { max-width: 1200px; margin: 0 auto; padding: 32px 16px 64px; }
+h1 { font-size: 24px; margin: 0 0 4px; }
+h2 { font-size: 18px; margin: 36px 0 12px; }
+.meta { color: var(--muted); }
+.meta code, td code { background: var(--code); padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 20px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.card .k { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+.card .v { font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.tablewrap { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+.num { text-align: right; white-space: nowrap; }
+.badge { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.b-pass { color: var(--pass); background: var(--pass-bg); }
+.b-fail, .b-error, .b-regression { color: var(--fail); background: var(--fail-bg); }
+.b-fixed { color: var(--pass); background: var(--pass-bg); }
+.b-added, .b-removed, .b-still_failing, .b-still_passing { color: var(--muted); background: var(--code); }
+tr.regression td { background: var(--fail-bg); }
+tr.fixed td { background: var(--pass-bg); }
+.s-ok { color: var(--pass); } .s-bad { color: var(--fail); font-weight: 600; }
+.better { color: var(--pass); } .worse { color: var(--fail); font-weight: 600; }
+.warn { background: var(--warn-bg); color: var(--warn); padding: 10px 14px; border-radius: 8px; margin: 12px 0; }
+details summary { cursor: pointer; color: var(--accent); }
+pre { background: var(--code); padding: 8px 10px; border-radius: 6px; white-space: pre-wrap; word-break: break-word; margin: 6px 0; font-size: 12px; }
+.out { max-width: 380px; word-break: break-word; }
+footer { margin-top: 40px; color: var(--muted); font-size: 12px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Eval-отчёт: {{ r.run_name }}</h1>
+  <div class="meta">
+    Ран <code>{{ r.run_id or "—" }}</code> · task <code>{{ r.task }}</code> ·
+    датасет <code>{{ r.dataset }}</code> (hash <code>{{ r.dataset_hash }}</code>) ·
+    {{ r.created_at }} · {{ "%.2f"|format(r.duration_s) }} с
+  </div>
+
+  <section class="cards">
+    {% for key in key_metrics %}
+    <div class="card"><div class="k">{{ key }}</div><div class="v">{{ r.metrics[key]|fm(key) }}</div></div>
+    {% endfor %}
+  </section>
+
+  <h2>Скореры</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Скорер</th><th class="num">Средняя оценка</th><th class="num">Pass rate</th></tr></thead>
+    <tbody>
+    {% for name in r.scorers %}
+      <tr><td><code>{{ name }}</code></td>
+        <td class="num">{{ r.metrics.get(name ~ "/mean")|fm(name ~ "/mean") }}</td>
+        <td class="num">{{ r.metrics.get(name ~ "/pass_rate")|fm("pass_rate") }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+
+  {% if diff %}
+  {% set counts = diff.counts() %}
+  <h2>Сравнение с базовым раном</h2>
+  <div class="meta">
+    <code>{{ diff.base_name }}</code> ({{ diff.base_run }}) → <code>{{ diff.new_name }}</code> ({{ diff.new_run }}) ·
+    регрессий: <strong class="worse">{{ counts.get("regression", 0) }}</strong> ·
+    исправлено: <strong class="better">{{ counts.get("fixed", 0) }}</strong>
+  </div>
+  {% if diff.dataset_changed %}
+  <div class="warn">Датасеты отличаются (разный hash) — сравнение может быть некорректным.</div>
+  {% endif %}
+  <div class="tablewrap" style="margin-top:12px"><table>
+    <thead><tr><th>Метрика</th><th class="num">База</th><th class="num">Новый</th><th class="num">Δ</th></tr></thead>
+    <tbody>
+    {% for key, d in diff.metrics.items() if key in key_metrics or key.endswith("/mean") %}
+      <tr><td>{{ key }}</td><td class="num">{{ d.base|fm(key) }}</td><td class="num">{{ d.new|fm(key) }}</td>
+        <td class="num {% if d.better is true %}better{% elif d.better is false %}worse{% endif %}">{{ d.delta|fd(key) }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+  <div class="tablewrap" style="margin-top:12px"><table>
+    <thead><tr><th>Кейс</th><th>Изменение</th><th>Δ скоров</th><th>Было</th><th>Стало</th></tr></thead>
+    <tbody>
+    {% for c in diff.cases %}
+      <tr class="{{ c.status }}"><td><code>{{ c.id }}</code></td>
+        <td><span class="badge b-{{ c.status }}">{{ status_labels[c.status] }}</span></td>
+        <td>{% for n, dv in c.score_deltas.items() if dv %}<div class="{{ 'better' if dv > 0 else 'worse' }}">{{ n }} {{ "%+.2f"|format(dv) }}</div>{% endfor %}</td>
+        <td class="out">{{ c.base_output|fv(140) }}</td><td class="out">{{ c.new_output|fv(140) }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+  {% endif %}
+
+  <h2>Кейсы ({{ r.cases|length }})</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Кейс</th><th>Статус</th>
+      {% for name in r.scorers %}<th class="num">{{ name }}</th>{% endfor %}
+      <th class="num">мс</th><th>Ответ</th></tr></thead>
+    <tbody>
+    {% for c in r.cases %}
+      {% set st = "pass" if c.passed else ("error" if c.error else "fail") %}
+      <tr><td><code>{{ c.id }}</code></td>
+        <td><span class="badge b-{{ st }}">{{ st|upper }}</span></td>
+        {% for name in r.scorers %}
+          {% set s = c.scores.get(name) %}
+          <td class="num {% if s %}{{ 's-ok' if s.passed else 's-bad' }}{% endif %}">{{ "%.2f"|format(s.value) if s else "—" }}</td>
+        {% endfor %}
+        <td class="num">{{ "%.1f"|format(c.latency_ms) }}</td>
+        <td class="out">
+          {{ (c.error or c.output)|fv(160) }}
+          <details><summary>подробнее</summary>
+            <div><strong>Вход</strong><pre>{{ c.input|pretty }}</pre></div>
+            <div><strong>Ожидалось</strong><pre>{{ c.expected|pretty }}</pre></div>
+            <div><strong>Ответ</strong><pre>{{ c.output|pretty }}</pre></div>
+            {% if c.error %}<div><strong>Ошибка</strong> (попыток: {{ c.attempts }})<pre>{{ c.error }}</pre></div>{% endif %}
+            {% for s in c.scores.values() if s.details %}
+            <div><strong>{{ s.name }}</strong><pre>{{ s.details|pretty }}</pre></div>
+            {% endfor %}
+            {% if c.task_metadata %}<div><strong>Трейс task</strong><pre>{{ c.task_metadata|pretty }}</pre></div>{% endif %}
+          </details>
+        </td></tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+
+  <h2>Параметры прогона</h2>
+  <div class="tablewrap"><table><tbody>
+    {% for k, v in r.params.items() %}<tr><td><code>{{ k }}</code></td><td>{{ v|fv(200) }}</td></tr>{% endfor %}
+  </tbody></table></div>
+
+  <footer>Сгенерировано mlops-tracker · самодостаточный HTML без внешних ресурсов</footer>
+</main>
+</body>
+</html>
