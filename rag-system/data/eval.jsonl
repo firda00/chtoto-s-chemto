@@ -1,0 +1,12 @@
+{"question": "Сколько стоит гостевой день?", "expected": "120 000", "source": "pricing.md"}
+{"question": "How much does color printing cost?", "expected": "3 000", "source": "faq.md"}
+{"question": "До скольки работает коворкинг в субботу?", "expected": "18:00", "source": "schedule.md"}
+{"question": "Can I get a refund for a monthly membership?", "expected": "7 days", "source": "policies.md"}
+{"question": "Какая скидка положена студентам?", "expected": "20%", "source": "pricing.md"}
+{"question": "Are dogs allowed in the coworking?", "expected": "10 kg", "source": "policies.md"}
+{"question": "Когда проходит нетворкинг для резидентов?", "expected": "четверг", "source": "schedule.md"}
+{"question": "How much is legal address registration?", "expected": "600 000", "source": "services.md"}
+{"question": "В каком году основана компания?", "expected": "2020", "source": "about.md"}
+{"question": "Как быстро отвечает поддержка?", "expected": "2 часов", "source": "support.md"}
+{"question": "What is the Wi-Fi speed?", "expected": "500 Mbps", "source": "faq.md"}
+{"question": "Сколько стоит переговорная Луна в час?", "expected": "150 000", "source": "pricing.md"}

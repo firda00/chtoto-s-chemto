@@ -1,0 +1,50 @@
+[project]
+name = "rag-system"
+version = "0.1.0"
+description = "Naive RAG and Modular RAG: chunking, embeddings, pgvector / in-memory store, hybrid search (BM25 + vector + RRF), reranking, routing and tool calling"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "openai>=1.40",
+    "pydantic>=2.7",
+    "typer>=0.12",
+    "numpy>=1.26",
+    "rank-bm25>=0.2.2",
+    "psycopg[binary]>=3.2",
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+]
+
+[project.optional-dependencies]
+# Локальные ONNX-эмбеддинги и cross-encoder реранкер (без torch).
+local = ["fastembed>=0.4"]
+
+[project.scripts]
+rag = "rag_system.cli:app"
+
+[dependency-groups]
+dev = ["pytest>=8.0", "ruff>=0.6", "httpx>=0.27"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/rag_system"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+ignore = ["RUF001", "RUF002", "RUF003"]  # кириллица в строках/комментариях — это нормально
+
+[tool.ruff.lint.per-file-ignores]
+"src/rag_system/cli.py" = ["B008"]  # typer-стиль: typer.Option(...) в аргументах по умолчанию
+"scripts/generate_data.py" = ["E501"]  # длинные строки синтетических документов
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
