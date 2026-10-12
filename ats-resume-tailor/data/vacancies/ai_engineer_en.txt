@@ -1,0 +1,23 @@
+Job title: Senior AI Engineer (LLM Applications)
+
+About the role
+You will build production LLM applications for an international HR-tech product (fictional company).
+
+What you'll do
+- Design retrieval-augmented generation pipelines and AI agents.
+- Own model serving, evaluation and monitoring.
+
+Requirements
+- 4+ years of experience as a software or ML engineer.
+- Strong Python and SQL skills.
+- Hands-on experience with large language models, RAG and embeddings.
+- FastAPI, Docker, Kubernetes.
+- Experience with AWS or GCP.
+
+Nice to have
+- LangChain or LlamaIndex.
+- MLflow, Airflow.
+- Fine-tuning (LoRA) and vLLM.
+
+What we offer
+- Fully remote, flexible hours.

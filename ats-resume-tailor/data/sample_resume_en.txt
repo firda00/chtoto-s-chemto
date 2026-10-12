@@ -1,0 +1,28 @@
+Maria Ivanova
+Machine Learning Engineer
+maria.ivanova@example.com | +1 555 010 0199 | linkedin.com/in/maria-ivanova-demo | Remote
+
+SUMMARY
+Machine learning engineer with 5 years of experience building NLP and recommendation systems in
+Python. Recently focused on large language models: retrieval-augmented generation, evaluation
+pipelines and serving models behind low-latency APIs.
+
+SKILLS
+Python3, SQL, PostgreSQL, PyTorch, Hugging Face Transformers, scikit-learn, FastAPI, Docker,
+Kubernetes, AWS (SageMaker, S3), Airflow, MLflow, Git, Linux
+
+WORK EXPERIENCE
+Brightline Analytics - Senior ML Engineer
+Jan 2022 - Present
+- Built a retrieval augmented generation assistant over 40k support articles; deflected 28% of tickets.
+- Designed an offline evaluation harness for LLM prompts and fine-tuned rerankers.
+- Served models with FastAPI on Kubernetes, cutting p95 latency from 900 ms to 350 ms.
+
+Northwind Retail - Machine Learning Engineer
+Aug 2019 - Dec 2021
+- Developed product recommendation models (PyTorch) that lifted CTR by 7%.
+- Orchestrated feature pipelines in Airflow and tracked experiments in MLflow.
+
+EDUCATION
+MSc in Computer Science, State University (example), 2017 - 2019
+BSc in Applied Mathematics, State University (example), 2013 - 2017
